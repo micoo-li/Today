@@ -1,0 +1,734 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C109BEB19503AE400077DF5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C109BEA19503AE400077DF5 /* Cocoa.framework */; };
+		4C109BF519503AE400077DF5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C109BF319503AE400077DF5 /* InfoPlist.strings */; };
+		4C109BF719503AE400077DF5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109BF619503AE400077DF5 /* main.m */; };
+		4C109BFB19503AE400077DF5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4C109BF919503AE400077DF5 /* Credits.rtf */; };
+		4C109BFE19503AE400077DF5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109BFD19503AE400077DF5 /* AppDelegate.m */; };
+		4C109C0119503AE400077DF5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C109BFF19503AE400077DF5 /* MainMenu.xib */; };
+		4C109C0319503AE400077DF5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C109C0219503AE400077DF5 /* Images.xcassets */; };
+		4C109C0A19503AE400077DF5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C109C0919503AE400077DF5 /* XCTest.framework */; };
+		4C109C0B19503AE400077DF5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C109BEA19503AE400077DF5 /* Cocoa.framework */; };
+		4C109C1319503AE400077DF5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C109C1119503AE400077DF5 /* InfoPlist.strings */; };
+		4C109C1519503AE400077DF5 /* TodayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C1419503AE400077DF5 /* TodayTests.m */; };
+		4C109C2B19503C6F00077DF5 /* INAppStoreWindowSwizzling.c in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C2019503C6F00077DF5 /* INAppStoreWindowSwizzling.c */; };
+		4C109C2C19503C6F00077DF5 /* INWindowBackgroundView+CoreUIRendering.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C2319503C6F00077DF5 /* INWindowBackgroundView+CoreUIRendering.m */; };
+		4C109C2D19503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C2519503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.m */; };
+		4C109C2E19503C6F00077DF5 /* INAppStoreWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C2719503C6F00077DF5 /* INAppStoreWindow.m */; };
+		4C109C2F19503C6F00077DF5 /* INWindowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C2A19503C6F00077DF5 /* INWindowButton.m */; };
+		4C109C331950444500077DF5 /* TDMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C321950444500077DF5 /* TDMainView.m */; };
+		4C109C361950499C00077DF5 /* TDTodayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C109C351950499C00077DF5 /* TDTodayView.xib */; };
+		4C109C39195049A800077DF5 /* TDTodayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C38195049A800077DF5 /* TDTodayView.m */; };
+		4C2AD0AD195198740051419E /* ANSegmentedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AD0A6195198740051419E /* ANSegmentedCell.m */; };
+		4C2AD0AE195198740051419E /* ANSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AD0A8195198740051419E /* ANSegmentedControl.m */; };
+		4C2AD0AF195198740051419E /* NSBezierPath+MCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AD0AA195198740051419E /* NSBezierPath+MCAdditions.m */; };
+		4C2AD0B0195198740051419E /* NSShadow+MCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AD0AC195198740051419E /* NSShadow+MCAdditions.m */; };
+		4C2AD0B61951BC200051419E /* TDTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AD0B51951BC200051419E /* TDTableView.m */; };
+		4C2AD0BA1951C2CC0051419E /* TDEditableLabelTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AD0B91951C2CC0051419E /* TDEditableLabelTextFieldCell.m */; };
+		4C72BC041950683D00E1C1FF /* TDTodaysTaskCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72BC031950683D00E1C1FF /* TDTodaysTaskCellView.m */; };
+		4C978DE519504B38000CEF31 /* TDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C978DE419504B38000CEF31 /* TDTodayViewController.m */; };
+		4C978DE919505DB9000CEF31 /* TDInboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C978DE719505DB9000CEF31 /* TDInboxViewController.m */; };
+		4C978DEA19505DB9000CEF31 /* TDInboxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C978DE819505DB9000CEF31 /* TDInboxView.xib */; };
+		4CAF75C71951555400EF4451 /* TDTodaysTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75C61951555400EF4451 /* TDTodaysTask.m */; };
+		4CAF75CD195164F200EF4451 /* TDEditableLabelTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75CC195164F200EF4451 /* TDEditableLabelTextField.m */; };
+		4CAF75D11951690100EF4451 /* TDTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75D01951690100EF4451 /* TDTableRowView.m */; };
+		4CAF75D719516F5E00EF4451 /* TDColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75D619516F5E00EF4451 /* TDColorView.m */; };
+		4CAF75DB195178B500EF4451 /* TDBottomWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75DA195178B500EF4451 /* TDBottomWindowView.m */; };
+		4CAF75DD19518FF100EF4451 /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4CAF75DC19518FF100EF4451 /* Notes.rtf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C109C0C19503AE400077DF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C109BDF19503AE300077DF5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C109BE619503AE400077DF5;
+			remoteInfo = Today;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C109BE719503AE400077DF5 /* Today.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Today.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C109BEA19503AE400077DF5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4C109BED19503AE400077DF5 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		4C109BEE19503AE400077DF5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4C109BEF19503AE400077DF5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4C109BF219503AE400077DF5 /* Today-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Today-Info.plist"; sourceTree = "<group>"; };
+		4C109BF419503AE400077DF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4C109BF619503AE400077DF5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4C109BF819503AE400077DF5 /* Today-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Today-Prefix.pch"; sourceTree = "<group>"; };
+		4C109BFA19503AE400077DF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		4C109BFC19503AE400077DF5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4C109BFD19503AE400077DF5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4C109C0019503AE400077DF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		4C109C0219503AE400077DF5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		4C109C0819503AE400077DF5 /* TodayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C109C0919503AE400077DF5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		4C109C1019503AE400077DF5 /* TodayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TodayTests-Info.plist"; sourceTree = "<group>"; };
+		4C109C1219503AE400077DF5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4C109C1419503AE400077DF5 /* TodayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayTests.m; sourceTree = "<group>"; };
+		4C109C2019503C6F00077DF5 /* INAppStoreWindowSwizzling.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = INAppStoreWindowSwizzling.c; sourceTree = "<group>"; };
+		4C109C2119503C6F00077DF5 /* INAppStoreWindowSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindowSwizzling.h; sourceTree = "<group>"; };
+		4C109C2219503C6F00077DF5 /* INWindowBackgroundView+CoreUIRendering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "INWindowBackgroundView+CoreUIRendering.h"; sourceTree = "<group>"; };
+		4C109C2319503C6F00077DF5 /* INWindowBackgroundView+CoreUIRendering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "INWindowBackgroundView+CoreUIRendering.m"; sourceTree = "<group>"; };
+		4C109C2419503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDocument+INAppStoreWindowFixes.h"; sourceTree = "<group>"; };
+		4C109C2519503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDocument+INAppStoreWindowFixes.m"; sourceTree = "<group>"; };
+		4C109C2619503C6F00077DF5 /* INAppStoreWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindow.h; sourceTree = "<group>"; };
+		4C109C2719503C6F00077DF5 /* INAppStoreWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INAppStoreWindow.m; sourceTree = "<group>"; };
+		4C109C2819503C6F00077DF5 /* INAppStoreWindowCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INAppStoreWindowCompatibility.h; sourceTree = "<group>"; };
+		4C109C2919503C6F00077DF5 /* INWindowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INWindowButton.h; sourceTree = "<group>"; };
+		4C109C2A19503C6F00077DF5 /* INWindowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INWindowButton.m; sourceTree = "<group>"; };
+		4C109C311950444500077DF5 /* TDMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDMainView.h; sourceTree = "<group>"; };
+		4C109C321950444500077DF5 /* TDMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDMainView.m; sourceTree = "<group>"; };
+		4C109C351950499C00077DF5 /* TDTodayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TDTodayView.xib; sourceTree = "<group>"; };
+		4C109C37195049A800077DF5 /* TDTodayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTodayView.h; sourceTree = "<group>"; };
+		4C109C38195049A800077DF5 /* TDTodayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTodayView.m; sourceTree = "<group>"; };
+		4C2AD0A5195198740051419E /* ANSegmentedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSegmentedCell.h; sourceTree = "<group>"; };
+		4C2AD0A6195198740051419E /* ANSegmentedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSegmentedCell.m; sourceTree = "<group>"; };
+		4C2AD0A7195198740051419E /* ANSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSegmentedControl.h; sourceTree = "<group>"; };
+		4C2AD0A8195198740051419E /* ANSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSegmentedControl.m; sourceTree = "<group>"; };
+		4C2AD0A9195198740051419E /* NSBezierPath+MCAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBezierPath+MCAdditions.h"; sourceTree = "<group>"; };
+		4C2AD0AA195198740051419E /* NSBezierPath+MCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBezierPath+MCAdditions.m"; sourceTree = "<group>"; };
+		4C2AD0AB195198740051419E /* NSShadow+MCAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSShadow+MCAdditions.h"; sourceTree = "<group>"; };
+		4C2AD0AC195198740051419E /* NSShadow+MCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSShadow+MCAdditions.m"; sourceTree = "<group>"; };
+		4C2AD0B41951BC200051419E /* TDTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTableView.h; sourceTree = "<group>"; };
+		4C2AD0B51951BC200051419E /* TDTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTableView.m; sourceTree = "<group>"; };
+		4C2AD0B71951C0EB0051419E /* TDConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TDConstants.h; path = ../TDConstants.h; sourceTree = "<group>"; };
+		4C2AD0B81951C2CC0051419E /* TDEditableLabelTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDEditableLabelTextFieldCell.h; path = ../TDEditableLabelTextFieldCell.h; sourceTree = "<group>"; };
+		4C2AD0B91951C2CC0051419E /* TDEditableLabelTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDEditableLabelTextFieldCell.m; path = ../TDEditableLabelTextFieldCell.m; sourceTree = "<group>"; };
+		4C72BC021950683D00E1C1FF /* TDTodaysTaskCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTodaysTaskCellView.h; sourceTree = "<group>"; };
+		4C72BC031950683D00E1C1FF /* TDTodaysTaskCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTodaysTaskCellView.m; sourceTree = "<group>"; };
+		4C80961819544B9A00D4ED9A /* Today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Today.entitlements; sourceTree = "<group>"; };
+		4C978DE319504B38000CEF31 /* TDTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTodayViewController.h; sourceTree = "<group>"; };
+		4C978DE419504B38000CEF31 /* TDTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTodayViewController.m; sourceTree = "<group>"; };
+		4C978DE619505DB9000CEF31 /* TDInboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDInboxViewController.h; sourceTree = "<group>"; };
+		4C978DE719505DB9000CEF31 /* TDInboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDInboxViewController.m; sourceTree = "<group>"; };
+		4C978DE819505DB9000CEF31 /* TDInboxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TDInboxView.xib; sourceTree = "<group>"; };
+		4CAF75C51951555400EF4451 /* TDTodaysTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDTodaysTask.h; path = ../TDTodaysTask.h; sourceTree = "<group>"; };
+		4CAF75C61951555400EF4451 /* TDTodaysTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDTodaysTask.m; path = ../TDTodaysTask.m; sourceTree = "<group>"; };
+		4CAF75CB195164F200EF4451 /* TDEditableLabelTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEditableLabelTextField.h; sourceTree = "<group>"; };
+		4CAF75CC195164F200EF4451 /* TDEditableLabelTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDEditableLabelTextField.m; sourceTree = "<group>"; };
+		4CAF75CF1951690100EF4451 /* TDTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDTableRowView.h; path = ../TDTableRowView.h; sourceTree = "<group>"; };
+		4CAF75D01951690100EF4451 /* TDTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDTableRowView.m; path = ../TDTableRowView.m; sourceTree = "<group>"; };
+		4CAF75D519516F5E00EF4451 /* TDColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDColorView.h; sourceTree = "<group>"; };
+		4CAF75D619516F5E00EF4451 /* TDColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDColorView.m; sourceTree = "<group>"; };
+		4CAF75D9195178B500EF4451 /* TDBottomWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBottomWindowView.h; sourceTree = "<group>"; };
+		4CAF75DA195178B500EF4451 /* TDBottomWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBottomWindowView.m; sourceTree = "<group>"; };
+		4CAF75DC19518FF100EF4451 /* Notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C109BE419503AE400077DF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C109BEB19503AE400077DF5 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C109C0519503AE400077DF5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C109C0B19503AE400077DF5 /* Cocoa.framework in Frameworks */,
+				4C109C0A19503AE400077DF5 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C109BDE19503AE300077DF5 = {
+			isa = PBXGroup;
+			children = (
+				4C109BF019503AE400077DF5 /* Today */,
+				4C109C0E19503AE400077DF5 /* TodayTests */,
+				4C109BE919503AE400077DF5 /* Frameworks */,
+				4C109BE819503AE400077DF5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4C109BE819503AE400077DF5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C109BE719503AE400077DF5 /* Today.app */,
+				4C109C0819503AE400077DF5 /* TodayTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C109BE919503AE400077DF5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C109BEA19503AE400077DF5 /* Cocoa.framework */,
+				4C109C0919503AE400077DF5 /* XCTest.framework */,
+				4C109BEC19503AE400077DF5 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C109BEC19503AE400077DF5 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C109BED19503AE400077DF5 /* AppKit.framework */,
+				4C109BEE19503AE400077DF5 /* CoreData.framework */,
+				4C109BEF19503AE400077DF5 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		4C109BF019503AE400077DF5 /* Today */ = {
+			isa = PBXGroup;
+			children = (
+				4C80961819544B9A00D4ED9A /* Today.entitlements */,
+				4C2AD0B71951C0EB0051419E /* TDConstants.h */,
+				4CAF75CE195164F800EF4451 /* Interfaces */,
+				4CAF75D8195178A000EF4451 /* Botton Window Bar */,
+				4C72BC051950684500E1C1FF /* Today's Task */,
+				4C72BC061950684D00E1C1FF /* Inbox */,
+				4C109C341950497F00077DF5 /* Xib */,
+				4C109C3019503C7400077DF5 /* Third Party */,
+				4C109BFC19503AE400077DF5 /* AppDelegate.h */,
+				4C109BFD19503AE400077DF5 /* AppDelegate.m */,
+				4C109C311950444500077DF5 /* TDMainView.h */,
+				4C109C321950444500077DF5 /* TDMainView.m */,
+				4C109C0219503AE400077DF5 /* Images.xcassets */,
+				4C109BF119503AE400077DF5 /* Supporting Files */,
+			);
+			path = Today;
+			sourceTree = "<group>";
+		};
+		4C109BF119503AE400077DF5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C109BF219503AE400077DF5 /* Today-Info.plist */,
+				4C109BF319503AE400077DF5 /* InfoPlist.strings */,
+				4C109BF619503AE400077DF5 /* main.m */,
+				4C109BF819503AE400077DF5 /* Today-Prefix.pch */,
+				4C109BF919503AE400077DF5 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C109C0E19503AE400077DF5 /* TodayTests */ = {
+			isa = PBXGroup;
+			children = (
+				4C109C1419503AE400077DF5 /* TodayTests.m */,
+				4C109C0F19503AE400077DF5 /* Supporting Files */,
+			);
+			path = TodayTests;
+			sourceTree = "<group>";
+		};
+		4C109C0F19503AE400077DF5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C109C1019503AE400077DF5 /* TodayTests-Info.plist */,
+				4C109C1119503AE400077DF5 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C109C1E19503C6E00077DF5 /* INAppStoreWindow */ = {
+			isa = PBXGroup;
+			children = (
+				4C109C1F19503C6F00077DF5 /* Extensions */,
+				4C109C2619503C6F00077DF5 /* INAppStoreWindow.h */,
+				4C109C2719503C6F00077DF5 /* INAppStoreWindow.m */,
+				4C109C2819503C6F00077DF5 /* INAppStoreWindowCompatibility.h */,
+				4C109C2919503C6F00077DF5 /* INWindowButton.h */,
+				4C109C2A19503C6F00077DF5 /* INWindowButton.m */,
+			);
+			path = INAppStoreWindow;
+			sourceTree = "<group>";
+		};
+		4C109C1F19503C6F00077DF5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4C109C2019503C6F00077DF5 /* INAppStoreWindowSwizzling.c */,
+				4C109C2119503C6F00077DF5 /* INAppStoreWindowSwizzling.h */,
+				4C109C2219503C6F00077DF5 /* INWindowBackgroundView+CoreUIRendering.h */,
+				4C109C2319503C6F00077DF5 /* INWindowBackgroundView+CoreUIRendering.m */,
+				4C109C2419503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.h */,
+				4C109C2519503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4C109C3019503C7400077DF5 /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				4C2AD0A4195198640051419E /* ANSegmentedControl */,
+				4C109C1E19503C6E00077DF5 /* INAppStoreWindow */,
+			);
+			name = "Third Party";
+			sourceTree = "<group>";
+		};
+		4C109C341950497F00077DF5 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				4C109BFF19503AE400077DF5 /* MainMenu.xib */,
+				4CAF75DC19518FF100EF4451 /* Notes.rtf */,
+				4C109C351950499C00077DF5 /* TDTodayView.xib */,
+				4C978DE819505DB9000CEF31 /* TDInboxView.xib */,
+			);
+			name = Xib;
+			sourceTree = "<group>";
+		};
+		4C2AD0A4195198640051419E /* ANSegmentedControl */ = {
+			isa = PBXGroup;
+			children = (
+				4C2AD0A5195198740051419E /* ANSegmentedCell.h */,
+				4C2AD0A6195198740051419E /* ANSegmentedCell.m */,
+				4C2AD0A7195198740051419E /* ANSegmentedControl.h */,
+				4C2AD0A8195198740051419E /* ANSegmentedControl.m */,
+				4C2AD0A9195198740051419E /* NSBezierPath+MCAdditions.h */,
+				4C2AD0AA195198740051419E /* NSBezierPath+MCAdditions.m */,
+				4C2AD0AB195198740051419E /* NSShadow+MCAdditions.h */,
+				4C2AD0AC195198740051419E /* NSShadow+MCAdditions.m */,
+			);
+			name = ANSegmentedControl;
+			sourceTree = "<group>";
+		};
+		4C72BC051950684500E1C1FF /* Today's Task */ = {
+			isa = PBXGroup;
+			children = (
+				4CAF75CA195155A000EF4451 /* Controller */,
+				4CAF75C91951559B00EF4451 /* View */,
+				4CAF75C81951559500EF4451 /* Model */,
+			);
+			name = "Today's Task";
+			sourceTree = "<group>";
+		};
+		4C72BC061950684D00E1C1FF /* Inbox */ = {
+			isa = PBXGroup;
+			children = (
+				4C978DE619505DB9000CEF31 /* TDInboxViewController.h */,
+				4C978DE719505DB9000CEF31 /* TDInboxViewController.m */,
+			);
+			name = Inbox;
+			sourceTree = "<group>";
+		};
+		4CAF75C81951559500EF4451 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4CAF75C51951555400EF4451 /* TDTodaysTask.h */,
+				4CAF75C61951555400EF4451 /* TDTodaysTask.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		4CAF75C91951559B00EF4451 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4C72BC021950683D00E1C1FF /* TDTodaysTaskCellView.h */,
+				4C72BC031950683D00E1C1FF /* TDTodaysTaskCellView.m */,
+				4C109C37195049A800077DF5 /* TDTodayView.h */,
+				4C109C38195049A800077DF5 /* TDTodayView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		4CAF75CA195155A000EF4451 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4C978DE319504B38000CEF31 /* TDTodayViewController.h */,
+				4C978DE419504B38000CEF31 /* TDTodayViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		4CAF75CE195164F800EF4451 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				4CAF75D519516F5E00EF4451 /* TDColorView.h */,
+				4CAF75D619516F5E00EF4451 /* TDColorView.m */,
+				4CAF75CF1951690100EF4451 /* TDTableRowView.h */,
+				4CAF75D01951690100EF4451 /* TDTableRowView.m */,
+				4CAF75CB195164F200EF4451 /* TDEditableLabelTextField.h */,
+				4CAF75CC195164F200EF4451 /* TDEditableLabelTextField.m */,
+				4C2AD0B81951C2CC0051419E /* TDEditableLabelTextFieldCell.h */,
+				4C2AD0B91951C2CC0051419E /* TDEditableLabelTextFieldCell.m */,
+				4C2AD0B41951BC200051419E /* TDTableView.h */,
+				4C2AD0B51951BC200051419E /* TDTableView.m */,
+			);
+			name = Interfaces;
+			sourceTree = "<group>";
+		};
+		4CAF75D8195178A000EF4451 /* Botton Window Bar */ = {
+			isa = PBXGroup;
+			children = (
+				4CAF75D9195178B500EF4451 /* TDBottomWindowView.h */,
+				4CAF75DA195178B500EF4451 /* TDBottomWindowView.m */,
+			);
+			name = "Botton Window Bar";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4C109BE619503AE400077DF5 /* Today */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C109C1819503AE400077DF5 /* Build configuration list for PBXNativeTarget "Today" */;
+			buildPhases = (
+				4C109BE319503AE400077DF5 /* Sources */,
+				4C109BE419503AE400077DF5 /* Frameworks */,
+				4C109BE519503AE400077DF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Today;
+			productName = Today;
+			productReference = 4C109BE719503AE400077DF5 /* Today.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4C109C0719503AE400077DF5 /* TodayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C109C1B19503AE400077DF5 /* Build configuration list for PBXNativeTarget "TodayTests" */;
+			buildPhases = (
+				4C109C0419503AE400077DF5 /* Sources */,
+				4C109C0519503AE400077DF5 /* Frameworks */,
+				4C109C0619503AE400077DF5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C109C0D19503AE400077DF5 /* PBXTargetDependency */,
+			);
+			name = TodayTests;
+			productName = TodayTests;
+			productReference = 4C109C0819503AE400077DF5 /* TodayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C109BDF19503AE300077DF5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = michael;
+				TargetAttributes = {
+					4C109BE619503AE400077DF5 = {
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+					4C109C0719503AE400077DF5 = {
+						TestTargetID = 4C109BE619503AE400077DF5;
+					};
+				};
+			};
+			buildConfigurationList = 4C109BE219503AE400077DF5 /* Build configuration list for PBXProject "Today" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4C109BDE19503AE300077DF5;
+			productRefGroup = 4C109BE819503AE400077DF5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4C109BE619503AE400077DF5 /* Today */,
+				4C109C0719503AE400077DF5 /* TodayTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C109BE519503AE400077DF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C109BF519503AE400077DF5 /* InfoPlist.strings in Resources */,
+				4C978DEA19505DB9000CEF31 /* TDInboxView.xib in Resources */,
+				4C109C361950499C00077DF5 /* TDTodayView.xib in Resources */,
+				4C109C0319503AE400077DF5 /* Images.xcassets in Resources */,
+				4CAF75DD19518FF100EF4451 /* Notes.rtf in Resources */,
+				4C109BFB19503AE400077DF5 /* Credits.rtf in Resources */,
+				4C109C0119503AE400077DF5 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C109C0619503AE400077DF5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C109C1319503AE400077DF5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C109BE319503AE400077DF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C109C2E19503C6F00077DF5 /* INAppStoreWindow.m in Sources */,
+				4C2AD0B61951BC200051419E /* TDTableView.m in Sources */,
+				4C2AD0AD195198740051419E /* ANSegmentedCell.m in Sources */,
+				4C109C2D19503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.m in Sources */,
+				4C109BFE19503AE400077DF5 /* AppDelegate.m in Sources */,
+				4C109C2F19503C6F00077DF5 /* INWindowButton.m in Sources */,
+				4C2AD0BA1951C2CC0051419E /* TDEditableLabelTextFieldCell.m in Sources */,
+				4C978DE919505DB9000CEF31 /* TDInboxViewController.m in Sources */,
+				4C109C2C19503C6F00077DF5 /* INWindowBackgroundView+CoreUIRendering.m in Sources */,
+				4C2AD0AE195198740051419E /* ANSegmentedControl.m in Sources */,
+				4C109C39195049A800077DF5 /* TDTodayView.m in Sources */,
+				4CAF75C71951555400EF4451 /* TDTodaysTask.m in Sources */,
+				4C109C2B19503C6F00077DF5 /* INAppStoreWindowSwizzling.c in Sources */,
+				4C109BF719503AE400077DF5 /* main.m in Sources */,
+				4CAF75D719516F5E00EF4451 /* TDColorView.m in Sources */,
+				4CAF75CD195164F200EF4451 /* TDEditableLabelTextField.m in Sources */,
+				4C2AD0AF195198740051419E /* NSBezierPath+MCAdditions.m in Sources */,
+				4CAF75DB195178B500EF4451 /* TDBottomWindowView.m in Sources */,
+				4C978DE519504B38000CEF31 /* TDTodayViewController.m in Sources */,
+				4C2AD0B0195198740051419E /* NSShadow+MCAdditions.m in Sources */,
+				4C109C331950444500077DF5 /* TDMainView.m in Sources */,
+				4CAF75D11951690100EF4451 /* TDTableRowView.m in Sources */,
+				4C72BC041950683D00E1C1FF /* TDTodaysTaskCellView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C109C0419503AE400077DF5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C109C1519503AE400077DF5 /* TodayTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C109C0D19503AE400077DF5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C109BE619503AE400077DF5 /* Today */;
+			targetProxy = 4C109C0C19503AE400077DF5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4C109BF319503AE400077DF5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C109BF419503AE400077DF5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		4C109BF919503AE400077DF5 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C109BFA19503AE400077DF5 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		4C109BFF19503AE400077DF5 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C109C0019503AE400077DF5 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		4C109C1119503AE400077DF5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C109C1219503AE400077DF5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4C109C1619503AE400077DF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4C109C1719503AE400077DF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4C109C1919503AE400077DF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Today/Today.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Today/Today-Prefix.pch";
+				INFOPLIST_FILE = "Today/Today-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		4C109C1A19503AE400077DF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Today/Today.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Today/Today-Prefix.pch";
+				INFOPLIST_FILE = "Today/Today-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		4C109C1C19503AE400077DF5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Today.app/Contents/MacOS/Today";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Today/Today-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TodayTests/TodayTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		4C109C1D19503AE400077DF5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Today.app/Contents/MacOS/Today";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Today/Today-Prefix.pch";
+				INFOPLIST_FILE = "TodayTests/TodayTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C109BE219503AE400077DF5 /* Build configuration list for PBXProject "Today" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C109C1619503AE400077DF5 /* Debug */,
+				4C109C1719503AE400077DF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C109C1819503AE400077DF5 /* Build configuration list for PBXNativeTarget "Today" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C109C1919503AE400077DF5 /* Debug */,
+				4C109C1A19503AE400077DF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C109C1B19503AE400077DF5 /* Build configuration list for PBXNativeTarget "TodayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C109C1C19503AE400077DF5 /* Debug */,
+				4C109C1D19503AE400077DF5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4C109BDF19503AE300077DF5 /* Project object */;
+}
