@@ -31,9 +31,6 @@
     [path lineToPoint:NSMakePoint(dirtyRect.size.width, 0.5)];
     [path stroke];
     
-    
-    
-    
 }
 
 @end

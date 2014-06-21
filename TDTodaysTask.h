@@ -13,6 +13,10 @@
 @property (readwrite, assign) BOOL completed;
 @property (readwrite, copy) NSString *taskName;
 
+//Priority ranges from 1 - 5, where 1 is the most important, and 0 means no priority has been given
+@property (readwrite, assign) NSInteger priority;
+
+
 -(id)initWithTaskName:(NSString *)name;
 
 @end

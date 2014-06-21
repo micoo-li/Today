@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TDTodayViewController">
             <connections>
+                <outlet property="priorityMenu" destination="Kng-XN-ZN1" id="3Sc-3E-6wa"/>
                 <outlet property="tableView" destination="m2u-zw-6EQ" id="XXj-FP-RGZ"/>
                 <outlet property="view" destination="Fbn-uI-hMB" id="Rqu-e0-DSs"/>
             </connections>
@@ -43,7 +44,7 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn width="643" minWidth="40" maxWidth="1000" id="iLC-q6-Joc">
+                                    <tableColumn identifier="TDColumnIdentifier" width="643" minWidth="40" maxWidth="1000" id="iLC-q6-Joc">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -61,7 +62,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b22-sN-cBG" customClass="TDEditableLabelTextField">
-                                                        <rect key="frame" x="44" y="8" width="358" height="21"/>
+                                                        <rect key="frame" x="75" y="8" width="358" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="PFq-xV-dks"/>
@@ -80,9 +81,18 @@
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                     </button>
+                                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BFc-OL-ZY4" customClass="TDPriorityButton">
+                                                        <rect key="frame" x="46" y="5" width="22" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <buttonCell key="cell" type="roundTextured" title="1" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pnR-5D-vak">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                    </button>
                                                 </subviews>
                                                 <connections>
                                                     <outlet property="completed" destination="mb5-SS-MyB" id="rUh-Qg-c4I"/>
+                                                    <outlet property="priorityButton" destination="BFc-OL-ZY4" id="8Ny-7y-dtX"/>
                                                     <outlet property="taskName" destination="b22-sN-cBG" id="DmL-V1-6yU"/>
                                                     <outlet property="textField" destination="b22-sN-cBG" id="ckM-VN-Zae"/>
                                                 </connections>
@@ -119,5 +129,49 @@
                 <outlet property="viewController" destination="-2" id="106-XX-CE4"/>
             </connections>
         </customView>
+        <menu id="Kng-XN-ZN1">
+            <items>
+                <menuItem title="Priority" id="aUz-za-MN8">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Pri-ri-9Ve"/>
+                <menuItem id="Idd-mW-YY0">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changedTaskPariority:" target="-2" id="nME-vc-oLx"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="1" id="JIF-DD-8s8">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changedTaskPariority:" target="-2" id="6YU-i2-dSl"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="2" id="VKP-cg-aNH">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changedTaskPariority:" target="-2" id="qy8-ei-tmh"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="3" id="Xta-79-LeQ">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changedTaskPariority:" target="-2" id="Vob-EC-x4c"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="4" id="H7n-io-swT">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changedTaskPariority:" target="-2" id="W7X-2Z-Aff"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="5" id="vLU-Dm-Dpk">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="changedTaskPariority:" target="-2" id="tEX-Nj-AcL"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
     </objects>
 </document>

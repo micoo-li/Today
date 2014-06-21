@@ -10,6 +10,7 @@
 
 #define TDCompletedKey @"completed"
 #define TDTaskNameKey @"taskname"
+#define TDPriorityKey @"priority"
 
 @implementation TDTodaysTask
 
@@ -23,6 +24,9 @@
     if ((self = [super init]))
     {
         self.taskName = name;
+        self.completed = false;
+        
+        self.priority = 0;
     }
     return self;
 }
@@ -41,6 +45,7 @@
     {
         self.completed = [aDecoder decodeBoolForKey:TDCompletedKey];
         self.taskName = [aDecoder decodeObjectForKey:TDTaskNameKey];
+        self.priority = [aDecoder decodeIntegerForKey:TDPriorityKey];
     }
     return self;
 }
@@ -49,6 +54,7 @@
 {
     [aCoder encodeBool:self.completed forKey:TDCompletedKey];
     [aCoder encodeObject:self.taskName forKey:TDTaskNameKey];
+    [aCoder encodeInteger:self.priority forKey:TDPriorityKey];
 }
 
 

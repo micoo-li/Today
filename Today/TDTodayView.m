@@ -28,10 +28,6 @@
     // Drawing code here.
 }
 
--(IBAction)addTask:(id)sender
-{
-    [viewController addTask:sender];
-}
 
 
 @end

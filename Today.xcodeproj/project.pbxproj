@@ -36,6 +36,7 @@
 		4C978DE519504B38000CEF31 /* TDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C978DE419504B38000CEF31 /* TDTodayViewController.m */; };
 		4C978DE919505DB9000CEF31 /* TDInboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C978DE719505DB9000CEF31 /* TDInboxViewController.m */; };
 		4C978DEA19505DB9000CEF31 /* TDInboxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C978DE819505DB9000CEF31 /* TDInboxView.xib */; };
+		4CA1BF0219557240007A089C /* TDPriorityButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA1BF0119557240007A089C /* TDPriorityButton.m */; };
 		4CAF75C71951555400EF4451 /* TDTodaysTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75C61951555400EF4451 /* TDTodaysTask.m */; };
 		4CAF75CD195164F200EF4451 /* TDEditableLabelTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75CC195164F200EF4451 /* TDEditableLabelTextField.m */; };
 		4CAF75D11951690100EF4451 /* TDTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75D01951690100EF4451 /* TDTableRowView.m */; };
@@ -111,6 +112,8 @@
 		4C978DE619505DB9000CEF31 /* TDInboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDInboxViewController.h; sourceTree = "<group>"; };
 		4C978DE719505DB9000CEF31 /* TDInboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDInboxViewController.m; sourceTree = "<group>"; };
 		4C978DE819505DB9000CEF31 /* TDInboxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TDInboxView.xib; sourceTree = "<group>"; };
+		4CA1BF0019557240007A089C /* TDPriorityButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDPriorityButton.h; sourceTree = "<group>"; };
+		4CA1BF0119557240007A089C /* TDPriorityButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDPriorityButton.m; sourceTree = "<group>"; };
 		4CAF75C51951555400EF4451 /* TDTodaysTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDTodaysTask.h; path = ../TDTodaysTask.h; sourceTree = "<group>"; };
 		4CAF75C61951555400EF4451 /* TDTodaysTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TDTodaysTask.m; path = ../TDTodaysTask.m; sourceTree = "<group>"; };
 		4CAF75CB195164F200EF4451 /* TDEditableLabelTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDEditableLabelTextField.h; sourceTree = "<group>"; };
@@ -327,6 +330,8 @@
 		4CAF75C91951559B00EF4451 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4CA1BF0019557240007A089C /* TDPriorityButton.h */,
+				4CA1BF0119557240007A089C /* TDPriorityButton.m */,
 				4C72BC021950683D00E1C1FF /* TDTodaysTaskCellView.h */,
 				4C72BC031950683D00E1C1FF /* TDTodaysTaskCellView.m */,
 				4C109C37195049A800077DF5 /* TDTodayView.h */,
@@ -481,6 +486,7 @@
 				4C109C2E19503C6F00077DF5 /* INAppStoreWindow.m in Sources */,
 				4C2AD0B61951BC200051419E /* TDTableView.m in Sources */,
 				4C2AD0AD195198740051419E /* ANSegmentedCell.m in Sources */,
+				4CA1BF0219557240007A089C /* TDPriorityButton.m in Sources */,
 				4C109C2D19503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.m in Sources */,
 				4C109BFE19503AE400077DF5 /* AppDelegate.m in Sources */,
 				4C109C2F19503C6F00077DF5 /* INWindowButton.m in Sources */,

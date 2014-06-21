@@ -17,7 +17,4 @@
 }
 
 
-//Method tells view controller to execute addTask: (because view controller is not part of the first responder chain)
--(IBAction)addTask:(id)sender;
-
 @end

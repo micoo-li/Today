@@ -12,7 +12,6 @@
 
 @interface TDTodayViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 {
-    IBOutlet NSTableView *tableView;
     
     TDTodaysTaskCellView *lastSelectedCellView;
     
@@ -23,8 +22,14 @@
     //Sometimes it only activates didchange and not changing, yet implementing changing is crucial so 
     BOOL selectionChanged;
     
+    
+    //Menu so users can pick the priority
+    IBOutlet NSMenu *priorityMenu;
+    
+    
 }
 
+@property (readwrite, retain) IBOutlet NSTableView *tableView;
 @property (readwrite, retain) NSMutableArray *todaysTasks;
 
 -(void)setTodaysTasks:(NSMutableArray *)todaysTasks;
@@ -32,6 +37,8 @@
 
 -(IBAction)addTask:(id)sender;
 -(IBAction)deleteTask:(id)sender;
+-(IBAction)changedTaskPariority:(id)sender;
+-(IBAction)priorityButtonClicked:(id)sender;
 -(IBAction)taskNameChanged:(id)sender;
 
 -(void)saveDataToDisk:(NSMutableArray *)data;

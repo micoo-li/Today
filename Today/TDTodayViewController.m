@@ -11,14 +11,18 @@
 #import "TDTodaysTask.h"
 #import "TDTodayViewController.h"
 #import "TDTableRowView.h"
+#import "TDPriorityButton.h"
 
 #import "TDConstants.h"
 
 static NSString *const TDRowIdentifier = @"TDRowIdentifier";
+static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
 
 @interface TDTodayViewController ()
 {
 }
+
+-(TDTodaysTaskCellView *)viewForTask:(TDTodaysTask *)task;
 
 @end
 
@@ -37,7 +41,7 @@ static NSString *const TDRowIdentifier = @"TDRowIdentifier";
         
         self.todaysTasks = [self readDataFromDisk];
         //If the file for our todays task does not exist
-        /*
+        
         if (!(self.todaysTasks = [self readDataFromDisk]))
         {
             self.todaysTasks = [[NSMutableArray alloc] init];
@@ -52,14 +56,55 @@ static NSString *const TDRowIdentifier = @"TDRowIdentifier";
             
             //Create folder
         }
-         */
     }
     return self;
 }
 
 -(void)viewDidLoad
 {
-    selectedRow = tableView.selectedRow;
+    selectedRow = self.tableView.selectedRow;
+}
+
+#pragma mark Methods
+
+-(TDTodaysTaskCellView *)viewForTask:(TDTodaysTask *)task
+{
+    TDTodaysTaskCellView *cellView = [self.tableView makeViewWithIdentifier:TDColumnIdntifier owner:self];
+    
+    [cellView.completed setState:task.completed];
+    [cellView.taskName setStringValue:task.taskName];
+    
+    [cellView.taskName setFocusRingType:NSFocusRingTypeNone];
+    [cellView.taskName setBezeled:NO];
+    
+    
+    //Use first responder instead
+    //Set cell view to attach IBAction
+    
+    [cellView.taskName setTarget:self];
+    [cellView.taskName setAction:@selector(taskNameChanged:)];
+    
+    //Setup priority button
+    
+    //Condition so that it displays nothing rather than 0
+    if (task.priority)
+        [cellView.priorityButton setTitle:[NSString stringWithFormat:@"%li", task.priority]];
+    else
+        [cellView.priorityButton setTitle:@""];
+    
+    [cellView.priorityButton setTarget:self];
+    [cellView.priorityButton setAction:@selector(priorityButtonClicked:)];
+    
+    if (task.priority == 0)
+    {
+        [cellView.priorityButton setTransparent:true];
+        cellView.priorityButton.hideWhenMouseOver = true;
+    }
+    
+    //Setup the view controller variable
+    cellView.viewController = self;
+    
+    return cellView;
 }
 
 #pragma mark Read/Write Methods
@@ -81,10 +126,10 @@ static NSString *const TDRowIdentifier = @"TDRowIdentifier";
     TDTodaysTask *task = [[TDTodaysTask alloc] initWithTaskName:[NSString stringWithFormat:@"New Task"]];
     
     [self.todaysTasks addObject:task];
-    [tableView reloadData];
+    [self.tableView reloadData];
     
     //Add task should select the new item so user can edit it
-    [tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:self.todaysTasks.count-1] byExtendingSelection:NO];
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:self.todaysTasks.count-1] byExtendingSelection:NO];
     
     
     //Update application support
@@ -95,18 +140,45 @@ static NSString *const TDRowIdentifier = @"TDRowIdentifier";
 -(IBAction)deleteTask:(id)sender
 {
     [self.todaysTasks removeObjectAtIndex:selectedRow];
-    [tableView reloadData];
-    [tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
+    [self.tableView reloadData];
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
 
     //Update application support
     [self saveDataToDisk:self.todaysTasks];
+}
+
+-(IBAction)changedTaskPariority:(id)sender
+{
+    NSInteger priority = [[sender title] intValue];
+    TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:selectedRow makeIfNecessary:NO];
+    TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
+    
+    task.priority = priority;
+    
+    if (task.priority)
+    {
+        [cellView.priorityButton setTitle:[NSString stringWithFormat:@"%li", task.priority]];
+        [cellView.priorityButton setHideWhenMouseOver:NO];
+    }
+    else
+    {
+        [cellView.priorityButton setTitle:@""];
+        [cellView.priorityButton setHideWhenMouseOver:YES];
+    }
+    
+    [self saveDataToDisk:self.todaysTasks];
+}
+
+-(IBAction)priorityButtonClicked:(id)sender
+{
+    [priorityMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
 }
 
 -(IBAction)taskNameChanged:(id)sender
 {
     TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
     
-    task.taskName = [[[tableView viewAtColumn:tableView.selectedColumn row:selectedRow makeIfNecessary:NO] taskName] stringValue];
+    task.taskName = [[[self.tableView viewAtColumn:self.tableView.selectedColumn row:selectedRow makeIfNecessary:NO] taskName] stringValue];
     
     //Update application support
     [self saveDataToDisk:self.todaysTasks];
@@ -123,29 +195,16 @@ static NSString *const TDRowIdentifier = @"TDRowIdentifier";
 
 -(NSView *)tableView:(NSTableView *)tv viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    TDTodaysTaskCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-    TDTodaysTask *task = [self.todaysTasks objectAtIndex:row];
-    [cellView.completed setState:task.completed];
-    [cellView.taskName setStringValue:task.taskName];
-    
-    [cellView.taskName setFocusRingType:NSFocusRingTypeNone];
-    [cellView.taskName setBezeled:NO];
-
-    
-    //Use first responder instead
-    //Set cell view to attach IBAction
-    
-    [cellView.taskName setTarget:self];
-    [cellView.taskName setAction:@selector(taskNameChanged:)];
-    
-    return cellView;
+    NSLog (@"%@", tableColumn.identifier);
+    return  [self viewForTask:[self.todaysTasks objectAtIndex:row]];
+ 
 }
 
 
 
 -(NSTableRowView *)tableView:(NSTableView *)tv rowViewForRow:(NSInteger)row
 {
-    TDTableRowView *tableRowView = [tableView makeViewWithIdentifier:TDRowIdentifier owner:self];
+    TDTableRowView *tableRowView = [self.tableView makeViewWithIdentifier:TDRowIdentifier owner:self];
     
     if (!tableRowView)
     {
@@ -164,9 +223,9 @@ static NSString *const TDRowIdentifier = @"TDRowIdentifier";
     
     if (lastSelectedCellView)
         [lastSelectedCellView.taskName setBackgroundColor:TDTableRowBackgroundColor];
-    if (tableView.selectedRow>-1)
+    if (self.tableView.selectedRow>-1)
     {
-        TDTodaysTaskCellView *cellView = [tableView viewAtColumn:tableView.selectedColumn row:tableView.selectedRow makeIfNecessary:NO];
+        TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:self.tableView.selectedRow makeIfNecessary:NO];
         [cellView.taskName setBackgroundColor:TDTableRowHighlightBackgroundColor];
         lastSelectedCellView = cellView;
     }
@@ -182,15 +241,15 @@ static NSString *const TDRowIdentifier = @"TDRowIdentifier";
 
 -(void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-    selectedRow = [tableView selectedRow];
+    selectedRow = [self.tableView selectedRow];
     
     if (!selectionChanged)
     {
         if (lastSelectedCellView)
             [lastSelectedCellView.taskName setBackgroundColor:TDTableRowBackgroundColor];
-        if (tableView.selectedRow>-1)
+        if (self.tableView.selectedRow>-1)
         {
-            TDTodaysTaskCellView *cellView = [tableView viewAtColumn:tableView.selectedColumn row:tableView.selectedRow makeIfNecessary:NO];
+            TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:self.tableView.selectedRow makeIfNecessary:NO];
             [cellView.taskName setBackgroundColor:TDTableRowHighlightBackgroundColor];
             lastSelectedCellView = cellView;
         }
