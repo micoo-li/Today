@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class TDTodaysTaskCellView;
+@class TDTodaysTaskCellView, TDTodaysTask;
 
 @interface TDTodayViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 {
@@ -32,15 +32,30 @@
 @property (readwrite, retain) IBOutlet NSTableView *tableView;
 @property (readwrite, retain) NSMutableArray *todaysTasks;
 
--(void)setTodaysTasks:(NSMutableArray *)todaysTasks;
--(NSMutableArray *)todaysTasks;
 
+//Todays View is now the selected view
+-(void)switchedToCurrentView;
+
+
+-(void)addNewTask:(TDTodaysTask *)task;
+-(void)addNewTask:(TDTodaysTask *)task atIndex:(NSUInteger)index;
+
+//Method for NSUndoManager
+-(void)addNewTaskWithArray:(NSArray *)array;
+
+-(void)removeTask:(NSUInteger)row;
+-(void)removeTaskForNumber:(NSNumber *)number;
+
+
+//Obvious IBAction methods
 -(IBAction)addTask:(id)sender;
 -(IBAction)deleteTask:(id)sender;
 -(IBAction)changedTaskPariority:(id)sender;
 -(IBAction)priorityButtonClicked:(id)sender;
 -(IBAction)taskNameChanged:(id)sender;
 
+//Read write methods
+//Each view controller will control its own disk data, no need for a central singleton class
 -(void)saveDataToDisk:(NSMutableArray *)data;
 -(NSMutableArray *)readDataFromDisk;
 

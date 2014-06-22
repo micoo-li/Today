@@ -8,13 +8,27 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define TODAY_VIEW 1
+#define INBOX_VIEW 2
+
 @class INAppStoreWindow, ANSegmentedControl;
+
+@class TDTodayViewController, TDInboxViewController;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
 {
-    NSMutableArray *viewControllers;
+    //View Controllers
+    TDTodayViewController *todayViewController;
+    TDInboxViewController *inboxViewController;
     
+    //Undo Manager for each view controllers
+    NSUndoManager *todayUndoManager;
+    NSUndoManager *inboxUndoManager;
+    
+    //Selected View
     NSView *currentView;
+    int selectedView;
+    
     
     IBOutlet NSView *titleBar;
     IBOutlet ANSegmentedControl *segmentedControl;

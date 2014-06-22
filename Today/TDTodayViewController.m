@@ -37,64 +37,55 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
         if (![fileManager fileExistsAtPath:TDTodaysTaskDirectory isDirectory:NULL])
             [fileManager createDirectoryAtPath:TDTodaysTaskDirectory withIntermediateDirectories:YES attributes:nil error:nil];
         
-        
-        
+        //Read saved task data from disk
         self.todaysTasks = [self readDataFromDisk];
-        //If the file for our todays task does not exist
         
+        //If the file for our todays task does not exist, create first list
         if (!(self.todaysTasks = [self readDataFromDisk]))
-        {
-            self.todaysTasks = [[NSMutableArray alloc] init];
-            for (int i=0;i<2;i++)
-            {
-                TDTodaysTask *task = [[TDTodaysTask alloc] initWithTaskName:@"Computer Science"];
-                [self.todaysTasks addObject:task];
-            }
-        }
-        else
-        {
-            
-            //Create folder
-        }
+            self.todaysTasks = [NSMutableArray arrayWithArray:@[[[TDTodaysTask alloc] initWithTaskName:@"New Task"]]];
     }
     return self;
 }
 
 -(void)viewDidLoad
 {
+    //Initialize variables when view loads
     selectedRow = self.tableView.selectedRow;
 }
 
 #pragma mark Methods
 
+//Method for NSTableView delegate mainly
+//Returns view initialized and setup for a certain task
 -(TDTodaysTaskCellView *)viewForTask:(TDTodaysTask *)task
 {
+    //Method calls awakeFromNib multiple times, so watch out
     TDTodaysTaskCellView *cellView = [self.tableView makeViewWithIdentifier:TDColumnIdntifier owner:self];
     
+    //Setup checkbox
     [cellView.completed setState:task.completed];
-    [cellView.taskName setStringValue:task.taskName];
     
+    //Setup task text field
+    [cellView.taskName setStringValue:task.taskName];
     [cellView.taskName setFocusRingType:NSFocusRingTypeNone];
     [cellView.taskName setBezeled:NO];
     
-    
-    //Use first responder instead
-    //Set cell view to attach IBAction
-    
+    //Attach text field to an IBAction
     [cellView.taskName setTarget:self];
     [cellView.taskName setAction:@selector(taskNameChanged:)];
     
     //Setup priority button
-    
-    //Condition so that it displays nothing rather than 0
+    //Condition so that it displays nothing rather than 0 when priority is undefined
     if (task.priority)
         [cellView.priorityButton setTitle:[NSString stringWithFormat:@"%li", task.priority]];
     else
         [cellView.priorityButton setTitle:@""];
     
+    //Attach priority button to an IBAction
     [cellView.priorityButton setTarget:self];
     [cellView.priorityButton setAction:@selector(priorityButtonClicked:)];
     
+    //Hide priority button when priority is undefined
     if (task.priority == 0)
     {
         [cellView.priorityButton setTransparent:true];
@@ -107,8 +98,14 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     return cellView;
 }
 
+-(void)switchedToCurrentView
+{
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
+}
+
 #pragma mark Read/Write Methods
 
+//Self-explanatory
 -(void)saveDataToDisk:(NSMutableArray *)data
 {
     [NSKeyedArchiver archiveRootObject:data toFile:TDTodaysTaskDataDirectory];
@@ -119,58 +116,108 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     return [NSKeyedUnarchiver unarchiveObjectWithFile:TDTodaysTaskDataDirectory];
 }
 
+-(void)addNewTask:(TDTodaysTask *)task{
+    
+    [self addNewTask:task atIndex:self.todaysTasks.count];
+    
+}
+
+-(void)addNewTask:(TDTodaysTask *)task atIndex:(NSUInteger)index
+{
+    //Use this method rather than reloadData, faster and better
+    [self.todaysTasks insertObject:task atIndex:index];
+    
+    //Add task should select the new item so user can edit it
+    [self.tableView insertRowsAtIndexes:[NSIndexSet indexSetWithIndex:index] withAnimation:0];
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:index] byExtendingSelection:NO];
+    
+    //Update disk data
+    [self saveDataToDisk:self.todaysTasks];
+}
+
+-(void)addNewTaskWithArray:(NSArray *)array
+{
+    [self addNewTask:array[0] atIndex:[array[1] intValue]];
+}
+
+-(void)removeTask:(NSUInteger)row
+{
+    //Temporary variable because after you delete nothing will be selected
+    NSUInteger tempSelectedRow = selectedRow;
+    
+    [self.todaysTasks removeObjectAtIndex:row];
+    [self.tableView removeRowsAtIndexes:[NSIndexSet indexSetWithIndex:row] withAnimation:0];
+    
+    
+    //Select the last row if the last item is deleted
+    if (tempSelectedRow == self.todaysTasks.count)
+        tempSelectedRow = self.todaysTasks.count-1;
+    
+    //Select row
+    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:tempSelectedRow] byExtendingSelection:NO];
+    
+
+    //Update application support
+    [self saveDataToDisk:self.todaysTasks];
+}
+
+-(void)removeTaskForNumber:(NSNumber *)number
+{
+    [self removeTask:number.integerValue-1];
+}
+                
 #pragma mark IBAction
 
 -(IBAction)addTask:(id)sender
 {
     TDTodaysTask *task = [[TDTodaysTask alloc] initWithTaskName:[NSString stringWithFormat:@"New Task"]];
     
-    [self.todaysTasks addObject:task];
-    [self.tableView reloadData];
+    [self addNewTask:task];
     
-    //Add task should select the new item so user can edit it
-    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:self.todaysTasks.count-1] byExtendingSelection:NO];
-    
-    
-    //Update application support
-    [self saveDataToDisk:self.todaysTasks];
+    //Seriously fuck undo
+    [[[[self view] window] undoManager] registerUndoWithTarget:self selector:@selector(removeTaskForNumber:) object:@(self.todaysTasks.count)];
     
 }
 
 -(IBAction)deleteTask:(id)sender
 {
-    [self.todaysTasks removeObjectAtIndex:selectedRow];
-    [self.tableView reloadData];
-    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
-
-    //Update application support
-    [self saveDataToDisk:self.todaysTasks];
+    //Add to undo manager
+    //Fuck this method
+    [[[[self view] window] undoManager] registerUndoWithTarget:self selector:@selector(addNewTaskWithArray:) object:@[[self.todaysTasks objectAtIndex:selectedRow], @(selectedRow)]];
+    
+    //Remove the task
+    [self removeTask:selectedRow];
+    
 }
 
 -(IBAction)changedTaskPariority:(id)sender
 {
+    
     NSInteger priority = [[sender title] intValue];
     TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:selectedRow makeIfNecessary:NO];
     TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
     
     task.priority = priority;
     
+    //Change button priority
     if (task.priority)
     {
         [cellView.priorityButton setTitle:[NSString stringWithFormat:@"%li", task.priority]];
         [cellView.priorityButton setHideWhenMouseOver:NO];
     }
-    else
+    else //If priority = 0
     {
         [cellView.priorityButton setTitle:@""];
         [cellView.priorityButton setHideWhenMouseOver:YES];
     }
     
+    //Update
     [self saveDataToDisk:self.todaysTasks];
 }
 
 -(IBAction)priorityButtonClicked:(id)sender
 {
+    //Popup the menu when the button is clicked
     [priorityMenu popUpMenuPositioningItem:nil atLocation:[NSEvent mouseLocation] inView:nil];
 }
 
@@ -195,9 +242,7 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
 
 -(NSView *)tableView:(NSTableView *)tv viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSLog (@"%@", tableColumn.identifier);
     return  [self viewForTask:[self.todaysTasks objectAtIndex:row]];
- 
 }
 
 
@@ -214,6 +259,10 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     return tableRowView;
 }
 
+-(void)tableView:(NSTableView *)tableView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
+{
+    
+}
 
 
 -(void)tableViewSelectionIsChanging:(NSNotification *)notification
@@ -242,7 +291,6 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
 -(void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     selectedRow = [self.tableView selectedRow];
-    
     if (!selectionChanged)
     {
         if (lastSelectedCellView)

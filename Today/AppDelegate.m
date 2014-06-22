@@ -14,7 +14,6 @@
 #import "TDTodayViewController.h"
 #import "TDInboxViewController.h"
 
-#define TODAY_VIEW_CONTROLLER [viewControllers objectAtIndex:0]
 #define INBOX_VIEW_CONTROLLER [viewControllers objectAtIndex:1]
 
 @interface AppDelegate()
@@ -30,14 +29,14 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{   
-    //Initialize View Controllers
-    viewControllers = [NSMutableArray array];
-    TDTodayViewController *todayVC = [[TDTodayViewController alloc] initWithNibName:@"TDTodayView" bundle:[NSBundle mainBundle]];
-    [viewControllers addObject:todayVC];
+{
+    todayViewController = [[TDTodayViewController alloc] initWithNibName:@"TDTodayView" bundle:[NSBundle mainBundle]];
+    inboxViewController = [[TDInboxViewController alloc] initWithNibName:@"TDInboxView" bundle:[NSBundle mainBundle]];
     
-    TDInboxViewController *inboxVC = [[TDInboxViewController alloc] initWithNibName:@"TDInboxView" bundle:[NSBundle mainBundle]];
-    [viewControllers addObject:inboxVC];
+    todayUndoManager = [[NSUndoManager alloc] init];
+    inboxUndoManager = [[NSUndoManager alloc] init];
+    
+    selectedView = TODAY_VIEW;
     
     //Change title bar so it's thicker
     self.window.titleBarHeight = 40;
@@ -60,26 +59,23 @@
     
     
     //Setup current view
-    [self.window.contentView addSubview:todayVC.view];
-    currentView = todayVC.view;
+    [self.window.contentView addSubview:todayViewController.view];
+    currentView = todayViewController.view;
     
     //Setup top bar add task actions
-    [addButton setTarget:TODAY_VIEW_CONTROLLER];
+    [addButton setTarget:todayViewController];
     [addButton setAction:@selector(addTask:)];
     
     //Setup new task menu item action
-    [newTaskItem setTarget:TODAY_VIEW_CONTROLLER];
+    [newTaskItem setTarget:todayViewController];
     [newTaskItem setAction:@selector(addTask:)];
     
     //Setup delete task menu item action
-    [deleteTaskItem setTarget:TODAY_VIEW_CONTROLLER];
+    [deleteTaskItem setTarget:todayViewController];
     [deleteTaskItem setAction:@selector(deleteTask:)];
     
     //Setup segmented control
     [segmentedControl setSelectedSegment:0];
-    
-    
-    
 }
 
 #pragma mark IBAction
@@ -97,24 +93,25 @@
 }
 
 
-
 #pragma mark Private Methods
 
 -(void)switchView:(NSInteger)viewNumber
 {
     switch (viewNumber) {
         case 0:
-            [self.window.contentView replaceSubview:currentView with:[TODAY_VIEW_CONTROLLER view]];
-            currentView = [TODAY_VIEW_CONTROLLER view];
+            [self.window.contentView replaceSubview:currentView with:[todayViewController view]];
+            currentView = [todayViewController view];
+            [todayViewController switchedToCurrentView];
+            
             //Setup menubar buttons
-            [addButton setTarget:TODAY_VIEW_CONTROLLER];
+            [addButton setTarget:todayViewController];
             [addButton setAction:@selector(addTask:)];
             
             
             break;
         case 1:
-            [self.window.contentView replaceSubview:currentView with:[INBOX_VIEW_CONTROLLER view]];
-            currentView = [INBOX_VIEW_CONTROLLER view];
+            [self.window.contentView replaceSubview:currentView with:[inboxViewController view]];
+            currentView = [inboxViewController view];
         default:
             break;
     }
@@ -125,15 +122,29 @@
 
 -(void)windowDidResize:(NSNotification *)notification
 {
-    
     NSRect newRect = [_window.contentView frame];
     newRect.size.height-=21;
     newRect.origin.y+=21;
     
-    for (NSViewController *viewController in viewControllers)
-    {
-        [viewController.view setFrame:newRect];
+    [todayViewController.view setFrame:newRect];
+    [inboxViewController.view setFrame:newRect];
+
+}
+
+-(NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window
+{
+    switch (selectedView) {
+        case TODAY_VIEW:
+            return todayUndoManager;
+            break;
+        case INBOX_VIEW:
+            return inboxUndoManager;
+            break;
+            
+        default:
+            break;
     }
+    return nil;
 }
 
 @end
