@@ -14,6 +14,8 @@
 #import "TDTodayViewController.h"
 #import "TDInboxViewController.h"
 
+#import "TDUndoManager.h"
+
 #define INBOX_VIEW_CONTROLLER [viewControllers objectAtIndex:1]
 
 @interface AppDelegate()
@@ -33,8 +35,8 @@
     todayViewController = [[TDTodayViewController alloc] initWithNibName:@"TDTodayView" bundle:[NSBundle mainBundle]];
     inboxViewController = [[TDInboxViewController alloc] initWithNibName:@"TDInboxView" bundle:[NSBundle mainBundle]];
     
-    todayUndoManager = [[NSUndoManager alloc] init];
-    inboxUndoManager = [[NSUndoManager alloc] init];
+    todayUndoManager = [[TDUndoManager alloc] init];
+    inboxUndoManager = [[TDUndoManager alloc] init];
     
     selectedView = TODAY_VIEW;
     

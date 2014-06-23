@@ -43,6 +43,7 @@
 		4CAF75D719516F5E00EF4451 /* TDColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75D619516F5E00EF4451 /* TDColorView.m */; };
 		4CAF75DB195178B500EF4451 /* TDBottomWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75DA195178B500EF4451 /* TDBottomWindowView.m */; };
 		4CAF75DD19518FF100EF4451 /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4CAF75DC19518FF100EF4451 /* Notes.rtf */; };
+		4CFDCC6D195810B200E19EB0 /* TDUndoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDCC6C195810B200E19EB0 /* TDUndoManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,8 @@
 		4CAF75D9195178B500EF4451 /* TDBottomWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBottomWindowView.h; sourceTree = "<group>"; };
 		4CAF75DA195178B500EF4451 /* TDBottomWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBottomWindowView.m; sourceTree = "<group>"; };
 		4CAF75DC19518FF100EF4451 /* Notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
+		4CFDCC6B195810B200E19EB0 /* TDUndoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDUndoManager.h; sourceTree = "<group>"; };
+		4CFDCC6C195810B200E19EB0 /* TDUndoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDUndoManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +154,8 @@
 		4C109BDE19503AE300077DF5 = {
 			isa = PBXGroup;
 			children = (
+				4CFDCC6B195810B200E19EB0 /* TDUndoManager.h */,
+				4CFDCC6C195810B200E19EB0 /* TDUndoManager.m */,
 				4C109BF019503AE400077DF5 /* Today */,
 				4C109C0E19503AE400077DF5 /* TodayTests */,
 				4C109BE919503AE400077DF5 /* Frameworks */,
@@ -488,6 +493,7 @@
 				4C2AD0AD195198740051419E /* ANSegmentedCell.m in Sources */,
 				4CA1BF0219557240007A089C /* TDPriorityButton.m in Sources */,
 				4C109C2D19503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.m in Sources */,
+				4CFDCC6D195810B200E19EB0 /* TDUndoManager.m in Sources */,
 				4C109BFE19503AE400077DF5 /* AppDelegate.m in Sources */,
 				4C109C2F19503C6F00077DF5 /* INWindowButton.m in Sources */,
 				4C2AD0BA1951C2CC0051419E /* TDEditableLabelTextFieldCell.m in Sources */,

@@ -31,6 +31,20 @@
     return self;
 }
 
+-(id)copyWithZone:(NSZone *)zone
+{
+    TDTodaysTask *copy = [[[self class] alloc] init];
+    
+    if (copy)
+    {
+        copy.completed = self.completed;
+        copy.taskName = [self.taskName copyWithZone:zone];
+        copy.priority = self.priority;
+    }
+    
+    return copy;
+}
+
 -(NSString *)description
 {
     return self.taskName;

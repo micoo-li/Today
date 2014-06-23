@@ -40,12 +40,16 @@
 -(void)addNewTask:(TDTodaysTask *)task;
 -(void)addNewTask:(TDTodaysTask *)task atIndex:(NSUInteger)index;
 
-//Method for NSUndoManager
--(void)addNewTaskWithArray:(NSArray *)array;
+-(void)addNewTaskForUndo:(TDTodaysTask *)task atIndex:(NSUInteger)index;
 
 -(void)removeTask:(NSUInteger)row;
--(void)removeTaskForNumber:(NSNumber *)number;
+-(void)removeTaskForUndo:(NSUInteger)row;
 
+-(void)editTaskNameForUndo:(NSString *)string forTaskIndex:(NSUInteger)index;
+
+-(void)editPriorityForUndo:(NSInteger)priority forTaskIndex:(NSUInteger)index;
+
+-(void)setPriorityButtonTitle:(NSInteger)priority forTaskIndex:(NSUInteger)index;
 
 //Obvious IBAction methods
 -(IBAction)addTask:(id)sender;

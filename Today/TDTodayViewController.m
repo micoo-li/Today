@@ -140,6 +140,13 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [self addNewTask:array[0] atIndex:[array[1] intValue]];
 }
 
+-(void) addNewTaskForUndo:(TDTodaysTask *)task atIndex:(NSUInteger)index
+{
+    [[[self undoManager] prepareWithInvocationTarget:self] removeTaskForUndo:index];
+    
+    [self addNewTask:task atIndex:index];
+}
+
 -(void)removeTask:(NSUInteger)row
 {
     //Temporary variable because after you delete nothing will be selected
@@ -161,45 +168,43 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [self saveDataToDisk:self.todaysTasks];
 }
 
--(void)removeTaskForNumber:(NSNumber *)number
+-(void)removeTaskForUndo:(NSUInteger)row
 {
-    [self removeTask:number.integerValue-1];
-}
-                
-#pragma mark IBAction
-
--(IBAction)addTask:(id)sender
-{
-    TDTodaysTask *task = [[TDTodaysTask alloc] initWithTaskName:[NSString stringWithFormat:@"New Task"]];
+    [[[self undoManager] prepareWithInvocationTarget:self] addNewTaskForUndo:self.todaysTasks[row] atIndex:row];
     
-    [self addNewTask:task];
-    
-    //Seriously fuck undo
-    [[[[self view] window] undoManager] registerUndoWithTarget:self selector:@selector(removeTaskForNumber:) object:@(self.todaysTasks.count)];
-    
+    [self removeTask:row];
 }
 
--(IBAction)deleteTask:(id)sender
+-(void)editTaskNameForUndo:(NSString *)string forTaskIndex:(NSUInteger)index
 {
-    //Add to undo manager
-    //Fuck this method
-    [[[[self view] window] undoManager] registerUndoWithTarget:self selector:@selector(addNewTaskWithArray:) object:@[[self.todaysTasks objectAtIndex:selectedRow], @(selectedRow)]];
+    //Casting because yolo
+    [[[self undoManager] prepareWithInvocationTarget:self] editTaskNameForUndo:(NSString *)[self.todaysTasks[index] taskName] forTaskIndex:index];
     
-    //Remove the task
-    [self removeTask:selectedRow];
+    //have to edit the text field
+    //More casting :(
+    [(TDTodaysTask*)[[self todaysTasks] objectAtIndex:index] setTaskName:string];
+    
+    //rofl objective-c
+    [[[[self tableView] viewAtColumn:0 row:index makeIfNecessary:NO] taskName] setStringValue:string];
     
 }
 
--(IBAction)changedTaskPariority:(id)sender
+-(void)editPriorityForUndo:(NSInteger)priority forTaskIndex:(NSUInteger)index
 {
+    [[[self undoManager] prepareWithInvocationTarget:self] editPriorityForUndo:[(TDTodaysTask *)self.todaysTasks[index] priority] forTaskIndex:index];
     
-    NSInteger priority = [[sender title] intValue];
-    TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:selectedRow makeIfNecessary:NO];
-    TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
+    [(TDTodaysTask *)self.todaysTasks[index] setPriority:priority];
     
-    task.priority = priority;
+    [self setPriorityButtonTitle:priority forTaskIndex:index];
     
-    //Change button priority
+}
+
+-(void)setPriorityButtonTitle:(NSInteger)priority forTaskIndex:(NSUInteger)index
+{
+    TDTodaysTask *task = self.todaysTasks[index];
+    TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:0 row:index makeIfNecessary:NO];
+    
+    
     if (task.priority)
     {
         [cellView.priorityButton setTitle:[NSString stringWithFormat:@"%li", task.priority]];
@@ -210,6 +215,40 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
         [cellView.priorityButton setTitle:@""];
         [cellView.priorityButton setHideWhenMouseOver:YES];
     }
+}
+                
+#pragma mark IBAction
+
+-(IBAction)addTask:(id)sender
+{
+    TDTodaysTask *task = [[TDTodaysTask alloc] initWithTaskName:[NSString stringWithFormat:@"New Task"]];
+    
+    [self addNewTask:task];
+    
+    [[[self undoManager] prepareWithInvocationTarget:self] removeTaskForUndo:self.todaysTasks.count-1];
+}
+
+-(IBAction)deleteTask:(id)sender
+{
+    [[[self undoManager] prepareWithInvocationTarget:self] addNewTaskForUndo:self.todaysTasks[selectedRow] atIndex:selectedRow];
+    
+    //Remove the task
+    [self removeTask:selectedRow];
+}
+
+-(IBAction)changedTaskPariority:(id)sender
+{
+    
+    NSInteger priority = [[sender title] intValue];
+    
+    
+    [[[self undoManager]  prepareWithInvocationTarget:self] editPriorityForUndo:priority forTaskIndex:selectedRow];
+    
+    TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
+    
+    task.priority = priority;
+    
+    [self setPriorityButtonTitle:priority forTaskIndex:selectedRow];
     
     //Update
     [self saveDataToDisk:self.todaysTasks];
@@ -225,7 +264,13 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
 {
     TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
     
+    //Undo bs
+    [[[self undoManager] prepareWithInvocationTarget:self] editTaskNameForUndo:task.taskName forTaskIndex:selectedRow];
+    
+    
     task.taskName = [[[self.tableView viewAtColumn:self.tableView.selectedColumn row:selectedRow makeIfNecessary:NO] taskName] stringValue];
+    
+    
     
     //Update application support
     [self saveDataToDisk:self.todaysTasks];
@@ -308,6 +353,12 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     
 }
 
+#pragma mark Inherited Methods
 
+//Why is this such a bitch
+-(NSUndoManager *)undoManager
+{
+    return [[[self view] window] undoManager];
+}
 
 @end

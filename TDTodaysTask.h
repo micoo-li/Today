@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TDTodaysTask : NSObject <NSCoding>
+@interface TDTodaysTask : NSObject <NSCoding, NSCopying>
 
 @property (readwrite, assign) BOOL completed;
 @property (readwrite, copy) NSString *taskName;
