@@ -26,12 +26,22 @@
     
     
     if (self.selectionHighlightStyle != NSTableViewSelectionHighlightStyleNone && self.selected) {
-        NSRect selectionRect = NSInsetRect(self.bounds, 5, 3);
+        NSRect selectionRect = NSInsetRect(self.bounds, 5, 2);
+        
+        //selectionRect.size.height-=3;
+        
+    
+        
         [TDTableRowBorderColor setStroke];
         [TDTableRowHighlightBackgroundColor setFill];
-        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:4 yRadius:4];
+        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:2 yRadius:2];
         [selectionPath fill];
+       // [selectionPath setLineWidth:1];
         [selectionPath stroke];
+    }
+    if (self.editing)
+    {
+        [TDTableRowEditingBackgroundColor setFill];
     }
     
 }

@@ -10,4 +10,6 @@
 
 @interface TDTableRowView : NSTableRowView
 
+@property (readwrite, assign) BOOL editing;
+
 @end

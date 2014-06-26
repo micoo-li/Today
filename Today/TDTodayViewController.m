@@ -12,6 +12,7 @@
 #import "TDTodayViewController.h"
 #import "TDTableRowView.h"
 #import "TDPriorityButton.h"
+#import "NSTimeFormatter.h"
 
 #import "TDConstants.h"
 
@@ -51,6 +52,19 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
 {
     //Initialize variables when view loads
     selectedRow = self.tableView.selectedRow;
+    
+    //Setup table view
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2){
+        
+        NSLog (@"1: %@", obj1);
+        NSLog (@"2: %@", obj2);
+        
+        return NSOrderedAscending;
+    
+    } ];
+    
+    [self.tableView setSortDescriptors:@[sortDescriptor]];
+    
 }
 
 #pragma mark Methods
@@ -67,8 +81,6 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     
     //Setup task text field
     [cellView.taskName setStringValue:task.taskName];
-    [cellView.taskName setFocusRingType:NSFocusRingTypeNone];
-    [cellView.taskName setBezeled:NO];
     
     //Attach text field to an IBAction
     [cellView.taskName setTarget:self];
@@ -91,6 +103,13 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
         [cellView.priorityButton setTransparent:true];
         cellView.priorityButton.hideWhenMouseOver = true;
     }
+    
+    //Time Text Field
+    [cellView.taskTime setStringValue:[NSTimeFormatter formattedTimeStringForTimeInterval:task.timeForTask]];
+    
+    [cellView.taskTime setTarget:self];
+    [cellView.taskTime setAction:@selector(changedTaskTime:)];
+    
     
     //Setup the view controller variable
     cellView.viewController = self;
@@ -209,12 +228,21 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     {
         [cellView.priorityButton setTitle:[NSString stringWithFormat:@"%li", task.priority]];
         [cellView.priorityButton setHideWhenMouseOver:NO];
+        [cellView.priorityButton setTransparent:NO];
+        [cellView.priorityButton setState:NSOffState];
     }
     else //If priority = 0
     {
         [cellView.priorityButton setTitle:@""];
         [cellView.priorityButton setHideWhenMouseOver:YES];
+        [cellView.priorityButton setTransparent:YES];
+        [cellView.priorityButton setState:NSOffState];
     }
+}
+
+-(void)completeTaskForUndo:(BOOL)completed forTaskIndex:(NSUInteger)index
+{
+    
 }
                 
 #pragma mark IBAction
@@ -236,15 +264,39 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [self removeTask:selectedRow];
 }
 
+-(IBAction)completedTask:(id)sender
+{
+    BOOL completed = [(TDTodaysTask *)self.todaysTasks[selectedRow] completed];
+    
+    [[[self undoManager] prepareWithInvocationTarget: self] completeTaskForUndo:completed  forTaskIndex:selectedRow];
+    
+    [(TDTodaysTask *)self.todaysTasks[selectedRow] setCompleted:!completed];
+    
+}
+
+-(IBAction)changedTaskTime:(id)sender
+{
+    TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
+    
+    TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:selectedRow makeIfNecessary:NO];
+    
+    NSString *timeString = [[cellView taskTime] stringValue];
+    
+    task.timeForTask = [NSTimeFormatter timeIntervalForString:timeString];
+    
+    cellView.taskTime.stringValue = [NSTimeFormatter formattedTimeString:timeString];
+    
+}
+
 -(IBAction)changedTaskPariority:(id)sender
 {
     
     NSInteger priority = [[sender title] intValue];
     
-    
-    [[[self undoManager]  prepareWithInvocationTarget:self] editPriorityForUndo:priority forTaskIndex:selectedRow];
-    
     TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
+    
+    if (priority != task.priority)
+        [[[self undoManager]  prepareWithInvocationTarget:self] editPriorityForUndo:task.priority forTaskIndex:selectedRow];
     
     task.priority = priority;
     
@@ -264,13 +316,59 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
 {
     TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
     
+    TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:selectedRow makeIfNecessary:NO];
+    
+    NSString *newTaskName = [[cellView taskName] stringValue];
+    
     //Undo bs
-    [[[self undoManager] prepareWithInvocationTarget:self] editTaskNameForUndo:task.taskName forTaskIndex:selectedRow];
+    if (![task.taskName isEqualToString:newTaskName])
+        [[[self undoManager] prepareWithInvocationTarget:self] editTaskNameForUndo:task.taskName forTaskIndex:selectedRow];
+    
+    NSMutableArray *split = [NSMutableArray arrayWithArray:[newTaskName componentsSeparatedByString:@" "]];
+    
+    NSUInteger hour = 0, minute = 0;
+    NSInteger prepositionIndex = -1;
+    
+    for (int i=1;i<split.count;i++)
+    {
+        if ([NSTimeFormatter keywordIsInArray:TDHourKeywords keyword:split[i]])
+        {
+            hour = [split[i-1] intValue];
+            if (!(hour == 0 && ![split[i-1] isEqualToString:@"0"]))
+            {
+                [split removeObjectAtIndex:i];
+                [split removeObjectAtIndex:i-1];
+            }
+            
+            if (prepositionIndex == -1)
+                prepositionIndex = i-2;
+        }
+        else if ([NSTimeFormatter keywordIsInArray:TDMinuteKeywords keyword:split[i]])
+        {
+            minute = [split[i-1] intValue];
+            if (!(minute == 0 && ![split[i-1] isEqualToString:@"0"]))
+            {
+                [split removeObjectAtIndex:i];
+                [split removeObjectAtIndex:i-1];
+            }
+            
+            if (prepositionIndex == -1)
+                prepositionIndex = i-2;
+        }
+    }
     
     
-    task.taskName = [[[self.tableView viewAtColumn:self.tableView.selectedColumn row:selectedRow makeIfNecessary:NO] taskName] stringValue];
+    if (prepositionIndex >= 0 && [NSTimeFormatter keywordIsInArray:TDPrepositionKeywords keyword:split[prepositionIndex]])
+        split = [NSMutableArray arrayWithArray:[split subarrayWithRange:NSMakeRange(0, prepositionIndex)]];
     
     
+    
+    task.taskName = [split componentsJoinedByString:@" "];
+    task.timeForTask = [NSTimeFormatter timeToInterval:hour andMinutes:minute];
+    
+    
+    cellView.taskName.stringValue = task.taskName;
+    cellView.taskTime.stringValue = [NSTimeFormatter formattedTimeString:hour andMinute:minute];
     
     //Update application support
     [self saveDataToDisk:self.todaysTasks];
@@ -316,11 +414,15 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     selectionChanged = true;
     
     if (lastSelectedCellView)
+    {
         [lastSelectedCellView.taskName setBackgroundColor:TDTableRowBackgroundColor];
+        [lastSelectedCellView.taskTime setBackgroundColor:TDTableRowBackgroundColor];
+    }
     if (self.tableView.selectedRow>-1)
     {
         TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:self.tableView.selectedRow makeIfNecessary:NO];
         [cellView.taskName setBackgroundColor:TDTableRowHighlightBackgroundColor];
+        [cellView.taskTime setBackgroundColor:TDTableRowHighlightBackgroundColor];
         lastSelectedCellView = cellView;
     }
     else
@@ -339,11 +441,15 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     if (!selectionChanged)
     {
         if (lastSelectedCellView)
+        {
             [lastSelectedCellView.taskName setBackgroundColor:TDTableRowBackgroundColor];
+            [lastSelectedCellView.taskTime setBackgroundColor:TDTableRowBackgroundColor];
+        }
         if (self.tableView.selectedRow>-1)
         {
             TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:self.tableView.selectedRow makeIfNecessary:NO];
             [cellView.taskName setBackgroundColor:TDTableRowHighlightBackgroundColor];
+            [cellView.taskTime setBackgroundColor:TDTableRowHighlightBackgroundColor];
             lastSelectedCellView = cellView;
         }
         else

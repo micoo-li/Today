@@ -11,6 +11,7 @@
 #define TDCompletedKey @"completed"
 #define TDTaskNameKey @"taskname"
 #define TDPriorityKey @"priority"
+#define TDTimeKey @"time"
 
 @implementation TDTodaysTask
 
@@ -27,6 +28,8 @@
         self.completed = false;
         
         self.priority = 0;
+        
+        self.timeForTask = 0;
     }
     return self;
 }
@@ -40,6 +43,7 @@
         copy.completed = self.completed;
         copy.taskName = [self.taskName copyWithZone:zone];
         copy.priority = self.priority;
+        copy.timeForTask = self.timeForTask;
     }
     
     return copy;
@@ -60,6 +64,7 @@
         self.completed = [aDecoder decodeBoolForKey:TDCompletedKey];
         self.taskName = [aDecoder decodeObjectForKey:TDTaskNameKey];
         self.priority = [aDecoder decodeIntegerForKey:TDPriorityKey];
+        self.timeForTask = [aDecoder decodeDoubleForKey:TDTimeKey];
     }
     return self;
 }
@@ -69,6 +74,7 @@
     [aCoder encodeBool:self.completed forKey:TDCompletedKey];
     [aCoder encodeObject:self.taskName forKey:TDTaskNameKey];
     [aCoder encodeInteger:self.priority forKey:TDPriorityKey];
+    [aCoder encodeDouble:self.timeForTask forKey:TDTimeKey];
 }
 
 

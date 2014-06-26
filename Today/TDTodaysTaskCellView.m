@@ -27,8 +27,8 @@
     [[NSColor gridColor] set];
     
     NSBezierPath *path = [NSBezierPath bezierPath];
-    [path moveToPoint:NSMakePoint(0, 0.5)];
-    [path lineToPoint:NSMakePoint(dirtyRect.size.width, 0.5)];
+    [path moveToPoint:NSMakePoint(0, 0)];
+    [path lineToPoint:NSMakePoint(dirtyRect.size.width, 0)];
     [path stroke];
     
 }

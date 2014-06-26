@@ -51,9 +51,13 @@
 
 -(void)setPriorityButtonTitle:(NSInteger)priority forTaskIndex:(NSUInteger)index;
 
+-(void)completeTaskForUndo:(BOOL)completed forTaskIndex:(NSUInteger)index;
+
 //Obvious IBAction methods
 -(IBAction)addTask:(id)sender;
 -(IBAction)deleteTask:(id)sender;
+-(IBAction)completedTask:(id)sender;
+-(IBAction)changedTaskTime:(id)sender;
 -(IBAction)changedTaskPariority:(id)sender;
 -(IBAction)priorityButtonClicked:(id)sender;
 -(IBAction)taskNameChanged:(id)sender;

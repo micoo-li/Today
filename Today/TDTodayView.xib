@@ -89,11 +89,21 @@
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                     </button>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PvQ-9H-9Wi" customClass="TDEditableLabelTextField">
+                                                        <rect key="frame" x="454" y="11" width="173" height="17"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="IiW-ur-Ys0" customClass="TDEditableLabelTextFieldCell">
+                                                            <font key="font" metaFont="system"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
                                                 </subviews>
                                                 <connections>
                                                     <outlet property="completed" destination="mb5-SS-MyB" id="rUh-Qg-c4I"/>
                                                     <outlet property="priorityButton" destination="BFc-OL-ZY4" id="8Ny-7y-dtX"/>
                                                     <outlet property="taskName" destination="b22-sN-cBG" id="DmL-V1-6yU"/>
+                                                    <outlet property="taskTime" destination="PvQ-9H-9Wi" id="Frw-S5-uqp"/>
                                                     <outlet property="textField" destination="b22-sN-cBG" id="ckM-VN-Zae"/>
                                                 </connections>
                                             </tableCellView>

@@ -13,9 +13,10 @@
 @interface TDTodaysTaskCellView : NSTableCellView
 
 
-@property (readwrite, assign) IBOutlet NSButton *completed;
-@property (readwrite, assign) IBOutlet NSTextField *taskName;
-@property (readwrite, assign) IBOutlet TDPriorityButton *priorityButton;
+@property (readwrite, retain) IBOutlet NSButton *completed;
+@property (readwrite, retain) IBOutlet NSTextField *taskName;
+@property (readwrite, retain) IBOutlet TDPriorityButton *priorityButton;
+@property (readwrite, retain) IBOutlet NSTextField *taskTime;
 
 @property (readwrite, retain) TDTodayViewController *viewController;
 

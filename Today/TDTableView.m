@@ -43,8 +43,22 @@
     TDTodaysTaskCellView *view = [self viewAtColumn:0 row:row makeIfNecessary:NO];
     
     // If the field can be edited, pop the editor into edit mode
-    if (view.taskName.isEditable) {
+    //Checks if mouse location is within the range of the text field
+    
+    NSPoint mouseLocation = [view convertPoint:[theEvent locationInWindow] fromView:nil];
+    CGFloat nameOrigin = view.taskName.frame.origin.x;
+    CGFloat nameWidth = view.taskName.frame.size.width;
+    
+    CGFloat timeOrigin = view.taskTime.frame.origin.x;
+    CGFloat timeWidth = view.taskTime.frame.size.width;
+    
+    
+    if (view.taskName.isEditable && (nameOrigin < mouseLocation.x && mouseLocation.x < (nameOrigin+nameWidth))) {
         [[view window] makeFirstResponder:view.textField];
+    }
+    else if (view.taskTime.isEditable && (timeOrigin < mouseLocation.x && mouseLocation.x < (timeOrigin+timeWidth)))
+    {
+        [[view window] makeFirstResponder:view.taskTime];
     }
 }
 

@@ -9,5 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 @interface TDEditableLabelTextField : NSTextField
+{
+    NSTrackingArea *trackingArea;
+}
+
+@property (readwrite, assign) BOOL hasMouseOver;
 
 @end
