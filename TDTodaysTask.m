@@ -51,7 +51,7 @@
 
 -(NSString *)description
 {
-    return self.taskName;
+    return [NSString stringWithFormat:@"Task Name:%@ Completed:%i Time:%f hours Priority:%lu", self.taskName, self.completed, self.timeForTask/3600, self.priority];
 }
 
 

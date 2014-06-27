@@ -64,6 +64,9 @@
     [self.window.contentView addSubview:todayViewController.view];
     currentView = todayViewController.view;
     
+    //Set first responder
+    [self.window makeFirstResponder:todayViewController.tableView];
+    
     //Setup top bar add task actions
     [addButton setTarget:todayViewController];
     [addButton setAction:@selector(addTask:)];
@@ -108,6 +111,9 @@
             //Setup menubar buttons
             [addButton setTarget:todayViewController];
             [addButton setAction:@selector(addTask:)];
+            
+            
+            [self.window makeFirstResponder:todayViewController.tableView];
             
             
             break;

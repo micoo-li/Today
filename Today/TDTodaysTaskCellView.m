@@ -19,6 +19,15 @@
     return self;
 }
 
+-(void)viewDidLoad
+{   
+    [[self window] makeFirstResponder:self.taskName];
+    
+    NSText* textEditor = [self.window fieldEditor:YES forObject:self.taskName];
+    NSRange range = {0, self.taskTime.stringValue.length};
+    [textEditor setSelectedRange:range];
+    
+}
 
 - (void)drawRect:(NSRect)dirtyRect
 {

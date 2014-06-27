@@ -19,6 +19,10 @@
 
 +(NSString *)formattedTimeString:(NSUInteger)hours andMinute:(NSUInteger)minutes
 {
+    if (hours == -1)
+        hours = 0;
+    if (minutes == -1)
+        minutes = 0;
     return [NSTimeFormatter formattedTimeStringForTimeInterval:[self timeToInterval:hours andMinutes:minutes]];
 }
 
@@ -30,14 +34,16 @@
     
     if (interval < 1)
         [dateFormatter setDateFormat:@""];
+    else if (interval == 60)
+        [dateFormatter setDateFormat:@"M' minute'"];
     else if (interval == 3600)
         [dateFormatter setDateFormat:@"H' hour'"];
     else if (interval == 3660)
-        [dateFormatter setDateFormat:@"H' hour'm' minute'"];
+        [dateFormatter setDateFormat:@"H' hour 'm' minute'"];
     else if (3600 < interval && interval < 7200) //1 hour (instead of hours)
-        [dateFormatter setDateFormat:@"H' hour'm' minutes'"];
+        [dateFormatter setDateFormat:@"H' hour 'm' minutes'"];
     else if ((long)(interval-60)%3600 == 0)
-        [dateFormatter setDateFormat:@"H' hour'm' minute'"];
+        [dateFormatter setDateFormat:@"H' hour 'm' minute'"];
     else if ((long)interval%3600 == 0)
         [dateFormatter setDateFormat:@"H' hours'"];
     else if (interval < 3600)
@@ -53,6 +59,10 @@
 
 +(NSTimeInterval)timeToInterval:(NSUInteger)hours andMinutes:(NSUInteger)minutes
 {
+    if (hours == -1)
+        hours = 0;
+    if (minutes == -1)
+        minutes = 0;
     return minutes*60+hours*60*60;
 }
 

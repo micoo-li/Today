@@ -21,6 +21,6 @@
 
 #define TDHourKeywords @[@"H", @"HH", @"Hour", @"Hours"]
 #define TDMinuteKeywords @[@"M", @"MM", @"Minute", @"Minutes"]
-#define TDPrepositionKeywords @[@"for"]
+#define TDPrepositionKeywords @[@"for", @"-"]
 
 #endif

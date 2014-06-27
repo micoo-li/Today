@@ -40,18 +40,20 @@
 -(void)addNewTask:(TDTodaysTask *)task;
 -(void)addNewTask:(TDTodaysTask *)task atIndex:(NSUInteger)index;
 
--(void)addNewTaskForUndo:(TDTodaysTask *)task atIndex:(NSUInteger)index;
 
--(void)removeTask:(NSUInteger)row;
+//Rewrite all this into view
+-(void)addNewTaskForUndo:(TDTodaysTask *)task atIndex:(NSUInteger)index;
 -(void)removeTaskForUndo:(NSUInteger)row;
 
--(void)editTaskNameForUndo:(NSString *)string forTaskIndex:(NSUInteger)index;
+-(void)editTaskNameForUndo:(NSString *)string timeInterval:(NSTimeInterval)interval forTaskView:(TDTodaysTaskCellView *)view;
+-(void)editPriorityForUndo:(NSInteger)priority forTaskView:(TDTodaysTaskCellView *)view;
+-(void)completeTaskForUndo:(BOOL)completed forTaskView:(TDTodaysTaskCellView *)view;
+-(void)changedTaskTimeForUndo:(NSTimeInterval)interval forTaskView:(TDTodaysTaskCellView *)view;
 
--(void)editPriorityForUndo:(NSInteger)priority forTaskIndex:(NSUInteger)index;
+-(void)removeTask:(NSUInteger)row;
 
--(void)setPriorityButtonTitle:(NSInteger)priority forTaskIndex:(NSUInteger)index;
+-(void)setPriorityButtonTitle:(NSInteger)priority forTaskView:(TDTodaysTaskCellView *)cellView;
 
--(void)completeTaskForUndo:(BOOL)completed forTaskIndex:(NSUInteger)index;
 
 //Obvious IBAction methods
 -(IBAction)addTask:(id)sender;

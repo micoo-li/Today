@@ -111,8 +111,22 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [cellView.taskTime setAction:@selector(changedTaskTime:)];
     
     
+    //Completed Checkbox
+    
+    [cellView.completed setState:task.completed];
+    [cellView.completed setTarget:self];
+    [cellView.completed setAction:@selector(completedTask:)];
+    
+    //Set action
+    [cellView setObjectValue:task];
+    
     //Setup the view controller variable
     cellView.viewController = self;
+    
+    //Task Time
+    [cellView.taskTime setStringValue:[NSTimeFormatter formattedTimeStringForTimeInterval:task.timeForTask]];
+    
+    NSLog (@"%@", self.todaysTasks);
     
     return cellView;
 }
@@ -164,6 +178,8 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [[[self undoManager] prepareWithInvocationTarget:self] removeTaskForUndo:index];
     
     [self addNewTask:task atIndex:index];
+    
+    [self saveDataToDisk:self.todaysTasks];
 }
 
 -(void)removeTask:(NSUInteger)row
@@ -192,37 +208,56 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [[[self undoManager] prepareWithInvocationTarget:self] addNewTaskForUndo:self.todaysTasks[row] atIndex:row];
     
     [self removeTask:row];
+
+    [self saveDataToDisk:self.todaysTasks];
 }
 
--(void)editTaskNameForUndo:(NSString *)string forTaskIndex:(NSUInteger)index
+-(void)editTaskNameForUndo:(NSString *)string timeInterval:(NSTimeInterval)interval forTaskView:(TDTodaysTaskCellView *)view
 {
-    //Casting because yolo
-    [[[self undoManager] prepareWithInvocationTarget:self] editTaskNameForUndo:(NSString *)[self.todaysTasks[index] taskName] forTaskIndex:index];
+    TDTodaysTask *task = view.objectValue;
     
-    //have to edit the text field
-    //More casting :(
-    [(TDTodaysTask*)[[self todaysTasks] objectAtIndex:index] setTaskName:string];
+    [[[self undoManager] prepareWithInvocationTarget:self] editTaskNameForUndo:task.taskName timeInterval:task.timeForTask forTaskView:view];
     
-    //rofl objective-c
-    [[[[self tableView] viewAtColumn:0 row:index makeIfNecessary:NO] taskName] setStringValue:string];
+    [task setTaskName:string];
+    [task setTimeForTask:interval];
+    
+    [[view taskName] setStringValue:string];
+    [[view taskTime] setStringValue:[NSTimeFormatter formattedTimeStringForTimeInterval:interval]];
+    
+    [self saveDataToDisk:self.todaysTasks];
+}
+
+
+-(void)editPriorityForUndo:(NSInteger)priority forTaskView:(TDTodaysTaskCellView *)view
+{
+    [[[self undoManager] prepareWithInvocationTarget:self] editPriorityForUndo:[(TDTodaysTask *)view.objectValue priority] forTaskView:view];
+    
+    [(TDTodaysTask *)[view objectValue] setPriority:priority];
+    
+    [self setPriorityButtonTitle:priority forTaskView:view];
+    
+    [self saveDataToDisk:self.todaysTasks];
     
 }
 
--(void)editPriorityForUndo:(NSInteger)priority forTaskIndex:(NSUInteger)index
+
+-(void)completeTaskForUndo:(BOOL)completed forTaskView:(TDTodaysTaskCellView *)view
 {
-    [[[self undoManager] prepareWithInvocationTarget:self] editPriorityForUndo:[(TDTodaysTask *)self.todaysTasks[index] priority] forTaskIndex:index];
+    TDTodaysTask *task = [view objectValue];
     
-    [(TDTodaysTask *)self.todaysTasks[index] setPriority:priority];
+    [[[self undoManager] prepareWithInvocationTarget:self] completeTaskForUndo:task.completed forTaskView:view];
     
-    [self setPriorityButtonTitle:priority forTaskIndex:index];
+    task.completed = completed;
+    
+    [[view completed] setState:completed];
+    
+    [self saveDataToDisk:self.todaysTasks];
     
 }
 
--(void)setPriorityButtonTitle:(NSInteger)priority forTaskIndex:(NSUInteger)index
+-(void)setPriorityButtonTitle:(NSInteger)priority forTaskView:(TDTodaysTaskCellView *)cellView
 {
-    TDTodaysTask *task = self.todaysTasks[index];
-    TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:0 row:index makeIfNecessary:NO];
-    
+    TDTodaysTask *task = [cellView objectValue];
     
     if (task.priority)
     {
@@ -240,9 +275,15 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     }
 }
 
--(void)completeTaskForUndo:(BOOL)completed forTaskIndex:(NSUInteger)index
+-(void)changedTaskTimeForUndo:(NSTimeInterval)interval forTaskView:(TDTodaysTaskCellView *)view
 {
+    TDTodaysTask *task = [view objectValue];
     
+    [[[self undoManager] prepareWithInvocationTarget:self] changedTaskTimeForUndo:task.timeForTask forTaskView:view];
+    
+    task.timeForTask = interval;
+    [[view taskTime] setStringValue:[NSTimeFormatter formattedTimeStringForTimeInterval:interval]];
+    [self saveDataToDisk:self.todaysTasks];
 }
                 
 #pragma mark IBAction
@@ -254,6 +295,8 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [self addNewTask:task];
     
     [[[self undoManager] prepareWithInvocationTarget:self] removeTaskForUndo:self.todaysTasks.count-1];
+    
+    [self saveDataToDisk:self.todaysTasks];
 }
 
 -(IBAction)deleteTask:(id)sender
@@ -262,45 +305,57 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     
     //Remove the task
     [self removeTask:selectedRow];
+    
+    [self saveDataToDisk:self.todaysTasks];
 }
 
 -(IBAction)completedTask:(id)sender
 {
-    BOOL completed = [(TDTodaysTask *)self.todaysTasks[selectedRow] completed];
+    TDTodaysTaskCellView *cellView = (TDTodaysTaskCellView *)[sender superview];
     
-    [[[self undoManager] prepareWithInvocationTarget: self] completeTaskForUndo:completed  forTaskIndex:selectedRow];
+    BOOL completed = [(TDTodaysTask *)[cellView objectValue] completed];
     
-    [(TDTodaysTask *)self.todaysTasks[selectedRow] setCompleted:!completed];
+    [[[self undoManager] prepareWithInvocationTarget: self] completeTaskForUndo:completed  forTaskView:cellView];
     
+    [(TDTodaysTask *)cellView.objectValue setCompleted:!completed];
+
+    [self saveDataToDisk:self.todaysTasks];
 }
 
 -(IBAction)changedTaskTime:(id)sender
 {
     TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
-    
     TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:self.tableView.selectedColumn row:selectedRow makeIfNecessary:NO];
-    
+
     NSString *timeString = [[cellView taskTime] stringValue];
+    NSTimeInterval interval = [NSTimeFormatter timeIntervalForString:timeString];
     
-    task.timeForTask = [NSTimeFormatter timeIntervalForString:timeString];
+    if (interval != task.timeForTask)
+        [[[self undoManager] prepareWithInvocationTarget:self] changedTaskTimeForUndo:task.timeForTask forTaskView:cellView];
+    
+    task.timeForTask = interval;
     
     cellView.taskTime.stringValue = [NSTimeFormatter formattedTimeString:timeString];
     
+    [self saveDataToDisk:self.todaysTasks];
 }
 
 -(IBAction)changedTaskPariority:(id)sender
 {
+    //Maybe change this later
+    //TDTodaysTaskCellView *cellView = (TDTodaysTaskCellView *)[sender superview];
+    TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:0 row:selectedRow makeIfNecessary:NO];
     
     NSInteger priority = [[sender title] intValue];
     
-    TDTodaysTask *task = [self.todaysTasks objectAtIndex:selectedRow];
+    TDTodaysTask *task = [cellView objectValue];
     
     if (priority != task.priority)
-        [[[self undoManager]  prepareWithInvocationTarget:self] editPriorityForUndo:task.priority forTaskIndex:selectedRow];
+        [[[self undoManager] prepareWithInvocationTarget:self] editPriorityForUndo:[(TDTodaysTask *)cellView.objectValue priority] forTaskView:cellView];
     
     task.priority = priority;
     
-    [self setPriorityButtonTitle:priority forTaskIndex:selectedRow];
+    [self setPriorityButtonTitle:priority forTaskView:cellView];
     
     //Update
     [self saveDataToDisk:self.todaysTasks];
@@ -321,12 +376,10 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     NSString *newTaskName = [[cellView taskName] stringValue];
     
     //Undo bs
-    if (![task.taskName isEqualToString:newTaskName])
-        [[[self undoManager] prepareWithInvocationTarget:self] editTaskNameForUndo:task.taskName forTaskIndex:selectedRow];
     
     NSMutableArray *split = [NSMutableArray arrayWithArray:[newTaskName componentsSeparatedByString:@" "]];
     
-    NSUInteger hour = 0, minute = 0;
+    NSUInteger hour = -1, minute = -1;
     NSInteger prepositionIndex = -1;
     
     for (int i=1;i<split.count;i++)
@@ -357,18 +410,36 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
         }
     }
     
-    
-    if (prepositionIndex >= 0 && [NSTimeFormatter keywordIsInArray:TDPrepositionKeywords keyword:split[prepositionIndex]])
-        split = [NSMutableArray arrayWithArray:[split subarrayWithRange:NSMakeRange(0, prepositionIndex)]];
-    
-    
-    
-    task.taskName = [split componentsJoinedByString:@" "];
-    task.timeForTask = [NSTimeFormatter timeToInterval:hour andMinutes:minute];
-    
-    
-    cellView.taskName.stringValue = task.taskName;
-    cellView.taskTime.stringValue = [NSTimeFormatter formattedTimeString:hour andMinute:minute];
+    if (!(hour == -1 && minute == -1))
+    {
+        if (prepositionIndex >= 0 && [NSTimeFormatter keywordIsInArray:TDPrepositionKeywords keyword:split[prepositionIndex]])
+            split = [NSMutableArray arrayWithArray:[split subarrayWithRange:NSMakeRange(0, prepositionIndex)]];
+        
+        
+        NSTimeInterval interval = [NSTimeFormatter timeToInterval:hour andMinutes:minute];
+
+        if (![task.taskName isEqualToString:newTaskName] || task.timeForTask!= interval)
+            [[[self undoManager] prepareWithInvocationTarget:self] editTaskNameForUndo:task.taskName timeInterval:task.timeForTask forTaskView:cellView];
+        
+        
+        task.taskName = [split componentsJoinedByString:@" "];
+        task.timeForTask = interval;
+        
+        
+        cellView.taskName.stringValue = task.taskName;
+        cellView.taskTime.stringValue = [NSTimeFormatter formattedTimeString:hour andMinute:minute];
+        
+        
+        
+    }
+    else{
+        
+        
+        if (![task.taskName isEqualToString:newTaskName])
+            [[[self undoManager] prepareWithInvocationTarget:self] editTaskNameForUndo:task.taskName timeInterval:task.timeForTask forTaskView:cellView];
+        task.taskName = newTaskName;
+        
+    }
     
     //Update application support
     [self saveDataToDisk:self.todaysTasks];
