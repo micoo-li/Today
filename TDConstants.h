@@ -23,4 +23,11 @@
 #define TDMinuteKeywords @[@"M", @"MM", @"Minute", @"Minutes"]
 #define TDPrepositionKeywords @[@"for", @"-"]
 
+enum
+{
+    TDSortCompleted = 1,
+    TDSortPriority,
+    TDSortTaskName
+};
+
 #endif

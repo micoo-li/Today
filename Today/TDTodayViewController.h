@@ -25,13 +25,12 @@
     
     //Menu so users can pick the priority
     IBOutlet NSMenu *priorityMenu;
-    
-    
 }
 
 @property (readwrite, retain) IBOutlet NSTableView *tableView;
 @property (readwrite, retain) NSMutableArray *todaysTasks;
 
+@property (readwrite, retain) IBOutlet NSMenu *sortMenu;
 
 //Todays View is now the selected view
 -(void)switchedToCurrentView;
@@ -54,6 +53,9 @@
 
 -(void)setPriorityButtonTitle:(NSInteger)priority forTaskView:(TDTodaysTaskCellView *)cellView;
 
+//Sort table view by options
+-(void)sortTableView:(NSInteger)option;
+
 
 //Obvious IBAction methods
 -(IBAction)addTask:(id)sender;
@@ -63,6 +65,8 @@
 -(IBAction)changedTaskPariority:(id)sender;
 -(IBAction)priorityButtonClicked:(id)sender;
 -(IBAction)taskNameChanged:(id)sender;
+
+-(IBAction)sortByMenu:(id)sender;
 
 //Read write methods
 //Each view controller will control its own disk data, no need for a central singleton class

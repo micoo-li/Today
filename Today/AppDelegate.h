@@ -38,6 +38,7 @@
     IBOutlet NSMenuItem *newTaskItem;
     IBOutlet NSMenuItem *deleteTaskItem;
     
+    IBOutlet NSMenuItem *sortByMenuItem;
 }
 
 @property (assign) IBOutlet INAppStoreWindow *window;

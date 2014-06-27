@@ -17,6 +17,7 @@
                 <outlet property="deleteTaskItem" destination="pa3-QI-u2k" id="Ds4-b6-vcC"/>
                 <outlet property="newTaskItem" destination="Was-JA-tGl" id="KJk-nI-eJW"/>
                 <outlet property="segmentedControl" destination="ae8-1E-LML" id="4Nz-tq-Rkn"/>
+                <outlet property="sortByMenuItem" destination="jhn-5q-ib4" id="k7d-xD-04v"/>
                 <outlet property="titleBar" destination="9rr-uZ-5X9" id="Zsg-eA-efe"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
@@ -643,6 +644,11 @@ CA
                                 <connections>
                                     <action selector="changeCurrentView:" target="Voe-Tx-rLC" id="3FR-Mi-sy1"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Qp2-pK-c9k"/>
+                            <menuItem title="Sort by" id="jhn-5q-ib4">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Sort by" id="myy-AI-orx"/>
                             </menuItem>
                         </items>
                     </menu>

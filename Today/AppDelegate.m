@@ -79,8 +79,14 @@
     [deleteTaskItem setTarget:todayViewController];
     [deleteTaskItem setAction:@selector(deleteTask:)];
     
+    //Setup sort menu
+    [sortByMenuItem setSubmenu:todayViewController.sortMenu];
+    
+    
     //Setup segmented control
     [segmentedControl setSelectedSegment:0];
+    
+    
 }
 
 #pragma mark IBAction
@@ -111,6 +117,9 @@
             //Setup menubar buttons
             [addButton setTarget:todayViewController];
             [addButton setAction:@selector(addTask:)];
+            
+            //setup menubar items
+            [sortByMenuItem setSubmenu:todayViewController.sortMenu];
             
             
             [self.window makeFirstResponder:todayViewController.tableView];

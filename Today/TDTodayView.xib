@@ -7,6 +7,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="TDTodayViewController">
             <connections>
                 <outlet property="priorityMenu" destination="Kng-XN-ZN1" id="3Sc-3E-6wa"/>
+                <outlet property="sortMenu" destination="L1S-CA-JkW" id="odP-y2-sII"/>
                 <outlet property="tableView" destination="m2u-zw-6EQ" id="XXj-FP-RGZ"/>
                 <outlet property="view" destination="Fbn-uI-hMB" id="Rqu-e0-DSs"/>
             </connections>
@@ -185,6 +186,22 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="changedTaskPariority:" target="-2" id="tEX-Nj-AcL"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
+        <menu id="L1S-CA-JkW">
+            <items>
+                <menuItem title="Priority" id="1rH-MV-ktz">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="sortByMenu:" target="-2" id="LAc-hf-v6q"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Task Name" id="mI2-s3-jgg">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="sortByMenu:" target="-2" id="gKf-0X-qJj"/>
                     </connections>
                 </menuItem>
             </items>

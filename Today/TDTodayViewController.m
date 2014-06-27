@@ -48,23 +48,18 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     return self;
 }
 
--(void)viewDidLoad
+-(void)loadView
 {
+    
+    NSLog (@"LOAD VIEW");
     //Initialize variables when view loads
     selectedRow = self.tableView.selectedRow;
     
     //Setup table view
-    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2){
-        
-        NSLog (@"1: %@", obj1);
-        NSLog (@"2: %@", obj2);
-        
-        return NSOrderedAscending;
+    //Sorting
+    [self sortTableView:TDSortCompleted];
     
-    } ];
-    
-    [self.tableView setSortDescriptors:@[sortDescriptor]];
-    
+    [super loadView];
 }
 
 #pragma mark Methods
@@ -125,8 +120,6 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     
     //Task Time
     [cellView.taskTime setStringValue:[NSTimeFormatter formattedTimeStringForTimeInterval:task.timeForTask]];
-    
-    NSLog (@"%@", self.todaysTasks);
     
     return cellView;
 }
@@ -285,7 +278,70 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [[view taskTime] setStringValue:[NSTimeFormatter formattedTimeStringForTimeInterval:interval]];
     [self saveDataToDisk:self.todaysTasks];
 }
-                
+
+-(void)sortTableView:(NSInteger)option
+{
+    NSSortDescriptor *sortDescriptor;
+    
+    //Sort by complete
+    if (option == TDSortCompleted)
+    {
+        sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"completed" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2){
+            
+            if ([(TDTodaysTask *)obj1 completed] == [(TDTodaysTask *)obj2 completed])
+                return NSOrderedSame;
+            else if ([(TDTodaysTask *)obj1 completed] < [(TDTodaysTask *)obj2 completed])
+                return NSOrderedAscending;
+            else
+                return NSOrderedDescending;
+            
+        } ];
+        
+    }
+    else if (option == TDSortPriority)
+    {
+        sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"priority" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
+           
+            //Make sure it is also task complete sorted too
+            if ([(TDTodaysTask *)obj1 completed] == [(TDTodaysTask *)obj2 completed])
+            {
+                if ([(TDTodaysTask *)obj1 priority] == [(TDTodaysTask *)obj2 priority])
+                    return NSOrderedSame;
+                else if ([(TDTodaysTask *)obj1 priority] < [(TDTodaysTask *)obj2 priority])
+                    return NSOrderedAscending;
+                else
+                    return NSOrderedDescending;
+            }
+            else if ([(TDTodaysTask *)obj1 completed] < [(TDTodaysTask *)obj2 completed])
+                return NSOrderedAscending;
+            else
+                return NSOrderedDescending;
+        }];
+    }
+    else if (option == TDSortTaskName)
+    {
+        sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"taskName" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2){
+            
+            if ([(TDTodaysTask *)obj1 completed] == [(TDTodaysTask *)obj2 completed])
+                return [[(TDTodaysTask *)obj1 taskName] compare:[(TDTodaysTask *)obj2 taskName]];
+            else if ([(TDTodaysTask *)obj1 completed] < [(TDTodaysTask *)obj2 completed])
+                return NSOrderedAscending;
+            else
+                return NSOrderedDescending;
+            
+            
+        }];
+        
+    }
+    
+    
+    [[self.tableView tableColumns][0] setSortDescriptorPrototype:sortDescriptor];
+    [self.todaysTasks sortUsingComparator:sortDescriptor.comparator];
+    
+    [self.tableView reloadData];
+    
+}
+
 #pragma mark IBAction
 
 -(IBAction)addTask:(id)sender
@@ -318,6 +374,8 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [[[self undoManager] prepareWithInvocationTarget: self] completeTaskForUndo:completed  forTaskView:cellView];
     
     [(TDTodaysTask *)cellView.objectValue setCompleted:!completed];
+    
+    [self sortTableView:TDSortCompleted];
 
     [self saveDataToDisk:self.todaysTasks];
 }
@@ -445,6 +503,21 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [self saveDataToDisk:self.todaysTasks];
 }
 
+
+-(IBAction)sortByMenu:(id)sender
+{
+    NSString *title = [sender title];
+    
+    if ([title isEqualToString:@"Priority"])
+    {
+        [self sortTableView:TDSortPriority];
+    }
+    else if ([title isEqualToString:@"Task Name"])
+    {
+        [self sortTableView:TDSortTaskName];
+    }
+}
+
 #pragma mark NSTableView DataSource
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -472,12 +545,6 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     }
     return tableRowView;
 }
-
--(void)tableView:(NSTableView *)tableView didAddRowView:(NSTableRowView *)rowView forRow:(NSInteger)row
-{
-    
-}
-
 
 -(void)tableViewSelectionIsChanging:(NSNotification *)notification
 {
@@ -528,6 +595,12 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     }
     selectionChanged = false;
     
+}
+
+-(void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
+{
+    [self.todaysTasks sortUsingComparator:[self.tableView sortDescriptors][0]];
+    [self.tableView reloadData];
 }
 
 #pragma mark Inherited Methods
