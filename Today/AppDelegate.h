@@ -39,6 +39,8 @@
     IBOutlet NSMenuItem *deleteTaskItem;
     
     IBOutlet NSMenuItem *sortByMenuItem;
+    
+    IBOutlet NSMenuItem *startTaskMenuItem;
 }
 
 @property (assign) IBOutlet INAppStoreWindow *window;

@@ -13,8 +13,11 @@
 @property (readwrite, assign) BOOL completed;
 @property (readwrite, copy) NSString *taskName;
 
-
 @property (readwrite, assign) NSTimeInterval timeForTask;
+
+@property (readwrite, assign) NSTimeInterval timeWorkedOnTask;
+@property (readwrite, retain) NSDate *timerStartDate;
+@property (readwrite, retain) NSTimer *taskTimer;
 
 //Priority ranges from 1 - 5, where 1 is the most important, and 0 means no priority has been given
 @property (readwrite, assign) NSInteger priority;

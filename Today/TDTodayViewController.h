@@ -25,12 +25,17 @@
     
     //Menu so users can pick the priority
     IBOutlet NSMenu *priorityMenu;
+    
+    TDTodaysTask *currentWorkingTask;
+    
+    
 }
 
 @property (readwrite, retain) IBOutlet NSTableView *tableView;
 @property (readwrite, retain) NSMutableArray *todaysTasks;
 
 @property (readwrite, retain) IBOutlet NSMenu *sortMenu;
+@property (readwrite, retain) IBOutlet NSMenuItem *startTaskMenuItem;
 
 //Todays View is now the selected view
 -(void)switchedToCurrentView;
@@ -56,6 +61,11 @@
 //Sort table view by options
 -(void)sortTableView:(NSInteger)option;
 
+-(void)taskTimer:(NSTimer *)timer;
+-(void)displayCompleteNotificationForTask:(TDTodaysTask *)task;
+
+
+
 
 //Obvious IBAction methods
 -(IBAction)addTask:(id)sender;
@@ -65,6 +75,8 @@
 -(IBAction)changedTaskPariority:(id)sender;
 -(IBAction)priorityButtonClicked:(id)sender;
 -(IBAction)taskNameChanged:(id)sender;
+
+-(IBAction)toggleTask:(id)sender;
 
 -(IBAction)sortByMenu:(id)sender;
 

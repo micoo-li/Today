@@ -31,21 +31,21 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <scrollView ambiguous="YES" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="38" horizontalPageScroll="10" verticalLineScroll="38" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azK-f8-0Lh">
+                <scrollView ambiguous="YES" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azK-f8-0Lh">
                     <rect key="frame" x="0.0" y="1" width="646" height="351"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" ambiguous="YES" misplaced="YES" id="X3D-uE-shg">
                         <rect key="frame" x="0.0" y="0.0" width="646" height="351"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="36" rowSizeStyle="automatic" viewBased="YES" id="m2u-zw-6EQ" customClass="TDTableView">
+                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" viewBased="YES" id="m2u-zw-6EQ" customClass="TDTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="646" height="351"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
-                                    <tableColumn identifier="TDColumnIdentifier" width="643" minWidth="40" maxWidth="1000" id="iLC-q6-Joc">
+                                    <tableColumn identifier="TDColumnIdentifier" width="642" minWidth="40" maxWidth="1000000" id="iLC-q6-Joc">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
                                             <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -59,11 +59,11 @@
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
                                             <tableCellView id="zSi-lS-7bU" customClass="TDTodaysTaskCellView">
-                                                <rect key="frame" x="1" y="1" width="643" height="36"/>
+                                                <rect key="frame" x="1" y="1" width="642" height="40"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b22-sN-cBG" customClass="TDEditableLabelTextField">
-                                                        <rect key="frame" x="75" y="8" width="358" height="21"/>
+                                                        <rect key="frame" x="73" y="12" width="300" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="PFq-xV-dks"/>
@@ -78,7 +78,7 @@
                                                         </connections>
                                                     </textField>
                                                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mb5-SS-MyB">
-                                                        <rect key="frame" x="18" y="9" width="22" height="18"/>
+                                                        <rect key="frame" x="18" y="13" width="22" height="18"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KmE-Y4-x32">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -86,15 +86,15 @@
                                                         </buttonCell>
                                                     </button>
                                                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BFc-OL-ZY4" customClass="TDPriorityButton">
-                                                        <rect key="frame" x="46" y="5" width="22" height="25"/>
+                                                        <rect key="frame" x="46" y="9" width="22" height="25"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <buttonCell key="cell" type="roundTextured" title="1" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pnR-5D-vak">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
                                                     </button>
-                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PvQ-9H-9Wi" customClass="TDEditableLabelTextField">
-                                                        <rect key="frame" x="454" y="11" width="173" height="17"/>
+                                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PvQ-9H-9Wi" customClass="TDEditableLabelTextField">
+                                                        <rect key="frame" x="419" y="12" width="173" height="17"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="IiW-ur-Ys0" customClass="TDEditableLabelTextFieldCell">
                                                             <font key="font" metaFont="system"/>
@@ -105,10 +105,19 @@
                                                             <outlet property="nextKeyView" destination="b22-sN-cBG" id="SlT-HV-byg"/>
                                                         </connections>
                                                     </textField>
+                                                    <customView ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W2B-Dk-n6X" customClass="DHCircularProgressView">
+                                                        <rect key="frame" x="598" y="1" width="36" height="36"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    </customView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="W2B-Dk-n6X" firstAttribute="leading" secondItem="PvQ-9H-9Wi" secondAttribute="trailing" constant="8" id="ObF-aZ-I7n"/>
+                                                    <constraint firstAttribute="trailing" secondItem="PvQ-9H-9Wi" secondAttribute="trailing" constant="53" id="eCe-4H-9RZ"/>
+                                                </constraints>
                                                 <connections>
                                                     <outlet property="completed" destination="mb5-SS-MyB" id="rUh-Qg-c4I"/>
                                                     <outlet property="priorityButton" destination="BFc-OL-ZY4" id="8Ny-7y-dtX"/>
+                                                    <outlet property="progressView" destination="W2B-Dk-n6X" id="lhT-ah-ZPf"/>
                                                     <outlet property="taskName" destination="b22-sN-cBG" id="DmL-V1-6yU"/>
                                                     <outlet property="taskTime" destination="PvQ-9H-9Wi" id="Frw-S5-uqp"/>
                                                     <outlet property="textField" destination="b22-sN-cBG" id="ckM-VN-Zae"/>
@@ -125,8 +134,11 @@
                         </subviews>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="gxI-wx-95U"/>
+                    </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="DWt-AI-37f">
-                        <rect key="frame" x="0.0" y="-16" width="0.0" height="16"/>
+                        <rect key="frame" x="0.0" y="335" width="646" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="eqs-kY-kV5">
@@ -206,5 +218,13 @@
                 </menuItem>
             </items>
         </menu>
+        <button verticalHuggingPriority="750" id="aBl-8n-mZj">
+            <rect key="frame" x="0.0" y="0.0" width="82" height="32"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fXQ-p8-8nm">
+                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                <font key="font" metaFont="system"/>
+            </buttonCell>
+        </button>
     </objects>
 </document>

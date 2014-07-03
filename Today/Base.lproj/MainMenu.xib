@@ -18,6 +18,7 @@
                 <outlet property="newTaskItem" destination="Was-JA-tGl" id="KJk-nI-eJW"/>
                 <outlet property="segmentedControl" destination="ae8-1E-LML" id="4Nz-tq-Rkn"/>
                 <outlet property="sortByMenuItem" destination="jhn-5q-ib4" id="k7d-xD-04v"/>
+                <outlet property="startTaskMenuItem" destination="wsl-V4-KTb" id="1cW-7R-Q5g"/>
                 <outlet property="titleBar" destination="9rr-uZ-5X9" id="Zsg-eA-efe"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
@@ -620,7 +621,7 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Task" id="7ht-SY-6MZ">
                         <items>
-                            <menuItem title="Item" id="wsl-V4-KTb">
+                            <menuItem title="Start Task" id="wsl-V4-KTb">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                         </items>
@@ -696,8 +697,9 @@ CA
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowCollectionBehavior key="collectionBehavior" fullScreenPrimary="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="634" height="421"/>
+            <rect key="contentRect" x="405" y="218" width="634" height="421"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <value key="minSize" type="size" width="300" height="421"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="634" height="421"/>
                 <autoresizingMask key="autoresizingMask"/>

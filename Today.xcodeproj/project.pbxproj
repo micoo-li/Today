@@ -26,6 +26,7 @@
 		4C109C331950444500077DF5 /* TDMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C321950444500077DF5 /* TDMainView.m */; };
 		4C109C361950499C00077DF5 /* TDTodayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C109C351950499C00077DF5 /* TDTodayView.xib */; };
 		4C109C39195049A800077DF5 /* TDTodayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C109C38195049A800077DF5 /* TDTodayView.m */; };
+		4C14F4CC195EA4E80094FEDF /* DHCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C14F4CB195EA4E80094FEDF /* DHCircularProgressView.m */; };
 		4C2AD0AD195198740051419E /* ANSegmentedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AD0A6195198740051419E /* ANSegmentedCell.m */; };
 		4C2AD0AE195198740051419E /* ANSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AD0A8195198740051419E /* ANSegmentedControl.m */; };
 		4C2AD0AF195198740051419E /* NSBezierPath+MCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2AD0AA195198740051419E /* NSBezierPath+MCAdditions.m */; };
@@ -93,6 +94,8 @@
 		4C109C351950499C00077DF5 /* TDTodayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TDTodayView.xib; sourceTree = "<group>"; };
 		4C109C37195049A800077DF5 /* TDTodayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTodayView.h; sourceTree = "<group>"; };
 		4C109C38195049A800077DF5 /* TDTodayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTodayView.m; sourceTree = "<group>"; };
+		4C14F4CA195EA4E80094FEDF /* DHCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHCircularProgressView.h; sourceTree = "<group>"; };
+		4C14F4CB195EA4E80094FEDF /* DHCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHCircularProgressView.m; sourceTree = "<group>"; };
 		4C2AD0A5195198740051419E /* ANSegmentedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSegmentedCell.h; sourceTree = "<group>"; };
 		4C2AD0A6195198740051419E /* ANSegmentedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ANSegmentedCell.m; sourceTree = "<group>"; };
 		4C2AD0A7195198740051419E /* ANSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSegmentedControl.h; sourceTree = "<group>"; };
@@ -277,6 +280,9 @@
 		4C109C3019503C7400077DF5 /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				4C14F4CD195EA4ED0094FEDF /* DHCircularProgressView */,
+				4C14F4CA195EA4E80094FEDF /* DHCircularProgressView.h */,
+				4C14F4CB195EA4E80094FEDF /* DHCircularProgressView.m */,
 				4C2AD0A4195198640051419E /* ANSegmentedControl */,
 				4C109C1E19503C6E00077DF5 /* INAppStoreWindow */,
 			);
@@ -292,6 +298,13 @@
 				4C978DE819505DB9000CEF31 /* TDInboxView.xib */,
 			);
 			name = Xib;
+			sourceTree = "<group>";
+		};
+		4C14F4CD195EA4ED0094FEDF /* DHCircularProgressView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DHCircularProgressView;
 			sourceTree = "<group>";
 		};
 		4C2AD0A4195198640051419E /* ANSegmentedControl */ = {
@@ -496,6 +509,7 @@
 				4C109C2E19503C6F00077DF5 /* INAppStoreWindow.m in Sources */,
 				4C2AD0B61951BC200051419E /* TDTableView.m in Sources */,
 				4C2AD0AD195198740051419E /* ANSegmentedCell.m in Sources */,
+				4C14F4CC195EA4E80094FEDF /* DHCircularProgressView.m in Sources */,
 				4CA1BF0219557240007A089C /* TDPriorityButton.m in Sources */,
 				4C109C2D19503C6F00077DF5 /* NSDocument+INAppStoreWindowFixes.m in Sources */,
 				4CFDCC6D195810B200E19EB0 /* TDUndoManager.m in Sources */,

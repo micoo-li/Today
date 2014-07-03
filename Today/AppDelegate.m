@@ -82,6 +82,11 @@
     //Setup sort menu
     [sortByMenuItem setSubmenu:todayViewController.sortMenu];
     
+    //Select view (other setup)
+    [self switchView:0];
+    
+    //Setup I-variables
+    todayViewController.startTaskMenuItem = startTaskMenuItem;
     
     //Setup segmented control
     [segmentedControl setSelectedSegment:0];
@@ -121,7 +126,11 @@
             //setup menubar items
             [sortByMenuItem setSubmenu:todayViewController.sortMenu];
             
+            //setp up start task menu item
+            [startTaskMenuItem setTarget:todayViewController];
+            [startTaskMenuItem setAction:@selector(toggleTask:)];
             
+            //Set table view to be first responder
             [self.window makeFirstResponder:todayViewController.tableView];
             
             

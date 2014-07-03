@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class TDPriorityButton, TDTodayViewController;
+@class TDPriorityButton, TDTodayViewController, DHCircularProgressView;
 
 @interface TDTodaysTaskCellView : NSTableCellView
 
@@ -17,6 +17,8 @@
 @property (readwrite, retain) IBOutlet NSTextField *taskName;
 @property (readwrite, retain) IBOutlet TDPriorityButton *priorityButton;
 @property (readwrite, retain) IBOutlet NSTextField *taskTime;
+
+@property (readwrite, retain) IBOutlet DHCircularProgressView *progressView;
 
 @property (readwrite, retain) TDTodayViewController *viewController;
 
