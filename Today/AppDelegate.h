@@ -15,6 +15,7 @@
 
 @class TDTodayViewController, TDInboxViewController;
 
+
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
 {
     //View Controllers
@@ -29,6 +30,7 @@
     NSView *currentView;
     int selectedView;
     
+    NSDockTile *dockTile;
     
     IBOutlet NSView *titleBar;
     IBOutlet ANSegmentedControl *segmentedControl;

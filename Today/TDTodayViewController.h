@@ -10,7 +10,7 @@
 
 @class TDTodaysTaskCellView, TDTodaysTask;
 
-@interface TDTodayViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
+@interface TDTodayViewController : NSViewController <NSTableViewDataSource, NSTableViewDelegate, NSUserNotificationCenterDelegate>
 {
     
     TDTodaysTaskCellView *lastSelectedCellView;
@@ -27,6 +27,7 @@
     IBOutlet NSMenu *priorityMenu;
     
     TDTodaysTask *currentWorkingTask;
+    TDTodaysTaskCellView *currentWorkingView;
     
     
 }
@@ -62,8 +63,7 @@
 -(void)sortTableView:(NSInteger)option;
 
 -(void)taskTimer:(NSTimer *)timer;
--(void)displayCompleteNotificationForTask:(TDTodaysTask *)task;
-
+-(void)displayCompleteNotificationWithInfo:(NSDictionary *)userInfo;
 
 
 

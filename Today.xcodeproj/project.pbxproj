@@ -45,6 +45,8 @@
 		4CAF75D719516F5E00EF4451 /* TDColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75D619516F5E00EF4451 /* TDColorView.m */; };
 		4CAF75DB195178B500EF4451 /* TDBottomWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAF75DA195178B500EF4451 /* TDBottomWindowView.m */; };
 		4CAF75DD19518FF100EF4451 /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4CAF75DC19518FF100EF4451 /* Notes.rtf */; };
+		4CC4006D19E43ED8003E78C7 /* TDTaskTimerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CC4006C19E43ED8003E78C7 /* TDTaskTimerView.xib */; };
+		4CC4007019E43EF5003E78C7 /* TDTaskTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC4006F19E43EF5003E78C7 /* TDTaskTimerView.m */; };
 		4CFDCC6D195810B200E19EB0 /* TDUndoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFDCC6C195810B200E19EB0 /* TDUndoManager.m */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +134,9 @@
 		4CAF75D9195178B500EF4451 /* TDBottomWindowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBottomWindowView.h; sourceTree = "<group>"; };
 		4CAF75DA195178B500EF4451 /* TDBottomWindowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBottomWindowView.m; sourceTree = "<group>"; };
 		4CAF75DC19518FF100EF4451 /* Notes.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
+		4CC4006C19E43ED8003E78C7 /* TDTaskTimerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TDTaskTimerView.xib; sourceTree = "<group>"; };
+		4CC4006E19E43EF5003E78C7 /* TDTaskTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDTaskTimerView.h; sourceTree = "<group>"; };
+		4CC4006F19E43EF5003E78C7 /* TDTaskTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDTaskTimerView.m; sourceTree = "<group>"; };
 		4CFDCC6B195810B200E19EB0 /* TDUndoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDUndoManager.h; sourceTree = "<group>"; };
 		4CFDCC6C195810B200E19EB0 /* TDUndoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDUndoManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,10 +297,10 @@
 		4C109C341950497F00077DF5 /* Xib */ = {
 			isa = PBXGroup;
 			children = (
-				4C109BFF19503AE400077DF5 /* MainMenu.xib */,
 				4CAF75DC19518FF100EF4451 /* Notes.rtf */,
-				4C109C351950499C00077DF5 /* TDTodayView.xib */,
-				4C978DE819505DB9000CEF31 /* TDInboxView.xib */,
+				4CC4007119E43F3E003E78C7 /* Main Xibs */,
+				4C109BFF19503AE400077DF5 /* MainMenu.xib */,
+				4CC4006C19E43ED8003E78C7 /* TDTaskTimerView.xib */,
 			);
 			name = Xib;
 			sourceTree = "<group>";
@@ -359,6 +364,8 @@
 				4C72BC031950683D00E1C1FF /* TDTodaysTaskCellView.m */,
 				4C109C37195049A800077DF5 /* TDTodayView.h */,
 				4C109C38195049A800077DF5 /* TDTodayView.m */,
+				4CC4006E19E43EF5003E78C7 /* TDTaskTimerView.h */,
+				4CC4006F19E43EF5003E78C7 /* TDTaskTimerView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -396,6 +403,15 @@
 				4CAF75DA195178B500EF4451 /* TDBottomWindowView.m */,
 			);
 			name = "Botton Window Bar";
+			sourceTree = "<group>";
+		};
+		4CC4007119E43F3E003E78C7 /* Main Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				4C109C351950499C00077DF5 /* TDTodayView.xib */,
+				4C978DE819505DB9000CEF31 /* TDInboxView.xib */,
+			);
+			name = "Main Xibs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -484,6 +500,7 @@
 				4C109BF519503AE400077DF5 /* InfoPlist.strings in Resources */,
 				4C978DEA19505DB9000CEF31 /* TDInboxView.xib in Resources */,
 				4C109C361950499C00077DF5 /* TDTodayView.xib in Resources */,
+				4CC4006D19E43ED8003E78C7 /* TDTaskTimerView.xib in Resources */,
 				4C109C0319503AE400077DF5 /* Images.xcassets in Resources */,
 				4CAF75DD19518FF100EF4451 /* Notes.rtf in Resources */,
 				4C109BFB19503AE400077DF5 /* Credits.rtf in Resources */,
@@ -533,6 +550,7 @@
 				4C109C331950444500077DF5 /* TDMainView.m in Sources */,
 				4CAF75D11951690100EF4451 /* TDTableRowView.m in Sources */,
 				4C72BC041950683D00E1C1FF /* TDTodaysTaskCellView.m in Sources */,
+				4CC4007019E43EF5003E78C7 /* TDTaskTimerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

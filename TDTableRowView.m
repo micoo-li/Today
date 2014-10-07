@@ -8,6 +8,7 @@
 
 #import "TDTableRowView.h"
 #import "TDConstants.h"
+#import "TDTodaysTask.h"
 
 @implementation TDTableRowView
 
@@ -24,20 +25,23 @@
 {
 //    [super drawRect:dirtyRect];
     
+    NSRect selectionRect = NSInsetRect(self.bounds, 5, 2);
+    NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:2 yRadius:2];
     
     if (self.selectionHighlightStyle != NSTableViewSelectionHighlightStyleNone && self.selected) {
-        NSRect selectionRect = NSInsetRect(self.bounds, 5, 2);
-        
-        //selectionRect.size.height-=3;
-        
-    
         
         [TDTableRowBorderColor setStroke];
         [TDTableRowHighlightBackgroundColor setFill];
-        NSBezierPath *selectionPath = [NSBezierPath bezierPathWithRoundedRect:selectionRect xRadius:2 yRadius:2];
         [selectionPath fill];
        // [selectionPath setLineWidth:1];
         [selectionPath stroke];
+    }
+    else if (!self.selected)
+    {
+        TDTodaysTask *task = [[self viewAtColumn:0] objectValue];
+        
+        [TDTableRowPriorityBackgroundColor[task.priority] setFill];
+        [selectionPath fill];
     }
     if (self.editing)
     {

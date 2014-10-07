@@ -10,29 +10,29 @@
 	<string>Today</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>BAAB803E-0BD6-46AC-A5B7-5C0F02EA67B1</key>
+		<key>698008B054DCC8D5EBF160E46B43B888FFB6AFB9</key>
 		<string>https://github.com/TheAmateurProgrammer/Today.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Today.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>BAAB803E-0BD6-46AC-A5B7-5C0F02EA67B1</key>
+		<key>698008B054DCC8D5EBF160E46B43B888FFB6AFB9</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/TheAmateurProgrammer/Today.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>BAAB803E-0BD6-46AC-A5B7-5C0F02EA67B1</string>
+	<string>698008B054DCC8D5EBF160E46B43B888FFB6AFB9</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>BAAB803E-0BD6-46AC-A5B7-5C0F02EA67B1</string>
+			<string>698008B054DCC8D5EBF160E46B43B888FFB6AFB9</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Today</string>
 		</dict>

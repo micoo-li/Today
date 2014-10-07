@@ -52,6 +52,10 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
 
 -(void)loadView
 {
+    TDTodaysTask *task = [[TDTodaysTask alloc] initWithTaskName:@"test"];
+    task.timeForTask = 5;
+    [self.todaysTasks addObject:task];
+    
     //Loads all the stuff
     //Code above this line will run before the view loads
     [super loadView];
@@ -67,6 +71,7 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     //Setup table view
     //Sorting
     [self sortTableView:TDSortCompleted];
+    
 }
 
 #pragma mark Methods
@@ -87,6 +92,7 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     //Attach text field to an IBAction
     [cellView.taskName setTarget:self];
     [cellView.taskName setAction:@selector(taskNameChanged:)];
+    [cellView.taskName setBackgroundColor:TDTableRowPriorityBackgroundColor[task.priority]];
     
     //Setup priority button
     //Condition so that it displays nothing rather than 0 when priority is undefined
@@ -111,6 +117,7 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     
     [cellView.taskTime setTarget:self];
     [cellView.taskTime setAction:@selector(changedTaskTime:)];
+    [cellView.taskTime setBackgroundColor:TDTableRowPriorityBackgroundColor[task.priority]];
     
     
     //Completed Checkbox
@@ -132,7 +139,7 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     [cellView.progressView setMaxValue:1];
     [cellView.progressView setCurrentValue:0];
     
-    [cellView.progressView setFillColor:TDTableRowBackgroundColor];
+    [cellView.progressView setFillColor:TDTableRowPriorityBackgroundColor[task.priority]];
     
     return cellView;
 }
@@ -369,31 +376,64 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     }
 }
 
+#pragma mark NSTimer Methods
+
 -(void)taskTimer:(NSTimer *)timer
 {
     //Key: "view"
     //Key: "task"
-    NSDictionary *info = [timer userInfo];
     
-    TDTodaysTaskCellView *view = info[@"view"];
-    TDTodaysTask *task = info[@"task"];
     
   //  task.timeWorkedOnTask = [[NSDate date] timeIntervalSinceDate:task.timerStartDate];
     
-    view.progressView.currentValue = task.timeWorkedOnTask + [[NSDate date] timeIntervalSinceDate:task.timerStartDate];
+    currentWorkingView.progressView.currentValue = currentWorkingTask.timeWorkedOnTask + [[NSDate date] timeIntervalSinceDate:currentWorkingTask.timerStartDate];
     
-    if (view.progressView.currentValue >= view.progressView.maxValue)
+    //NSLog (@"%f", currentWorkingTask.timeWorkedOnTask + [[NSDate date] timeIntervalSinceDate:currentWorkingTask.timerStartDate]);
+    
+    NSTimeInterval secondsRemaining = currentWorkingTask.timeForTask - [[NSDate date] timeIntervalSinceDate:currentWorkingTask.timerStartDate];
+    
+    NSString *dockLabelString = [self secondsToString:secondsRemaining];
+    
+  //  [[NSApp dockTile] setShowsApplicationBadge:YES];
+    [[NSApp dockTile] setBadgeLabel: dockLabelString];
+    
+    if (currentWorkingView.progressView.currentValue >= currentWorkingView.progressView.maxValue)
     {
-        [task.taskTimer invalidate];
-        [self displayCompleteNotificationForTask:task];
+        
+        [[NSApp dockTile] setBadgeLabel:@""];
+        
+    //    [[NSApp dockTile] setShowsApplicationBadge:NO];
+        
+        [currentWorkingTask.taskTimer invalidate];
+        [self displayCompleteNotificationWithInfo:nil];
     }
 }
 
--(void)displayCompleteNotificationForTask:(TDTodaysTask *)task
+
+-(NSString *)secondsToString:(NSTimeInterval)time
+{
+    NSString *label = @"";
+    
+    if (time < 60)
+        label = [NSString stringWithFormat:@"%is", (int)time];
+    else if (time < 3600)
+        label = [NSString stringWithFormat:@"00:%i", (int)time/60];
+    else
+        label = [NSString stringWithFormat:@"%i:%i", (int)time/3600, ((int)time%3600)/60];
+    
+    
+    return label;
+}
+
+
+-(void)displayCompleteNotificationWithInfo:(NSDictionary *)userInfo
 {
     NSUserNotification *notification = [[NSUserNotification alloc] init];
     notification.title = @"Today";
-    notification.informativeText = [NSString stringWithFormat:@"Task \"%@\" completed", task.taskName];
+    notification.informativeText = [NSString stringWithFormat:@"Task \"%@\" completed", currentWorkingTask.taskName];
+    notification.soundName = NSUserNotificationDefaultSoundName;
+    notification.hasActionButton = YES;
+    notification.actionButtonTitle = @"Mark as Complete";
     
     [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
 }
@@ -577,14 +617,14 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
 
 -(IBAction)toggleTask:(NSMenuItem *)sender
 {
-    
-    if ([sender.title isEqualToString:@"Start Task"])
+    if ([sender.title isEqualToString:@"Start Task"]) //Start a task
     {
         TDTodaysTask *task = self.todaysTasks[selectedRow];
         TDTodaysTaskCellView *view = [self.tableView viewAtColumn:0 row:selectedRow makeIfNecessary:NO];
     
         //So the controller knows which task is currently running
         currentWorkingTask = task;
+        currentWorkingView = view;
         
         //Setup menu item so it says pause instead of start
         self.startTaskMenuItem.title = @"Pause Task";
@@ -592,8 +632,12 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
         task.timerStartDate = [NSDate date];
         [view.progressView setMaxValue:task.timeForTask];
         [view.progressView setCurrentValue:task.timeWorkedOnTask];
+        
+        //Change view to task timer view
+        
+        
     
-        task.taskTimer = [NSTimer timerWithTimeInterval:1.0/15.0 target:self selector:@selector(taskTimer:) userInfo:@{@"view": view, @"task": task } repeats:YES];
+        task.taskTimer = [NSTimer timerWithTimeInterval:1.0/3.0 target:self selector:@selector(taskTimer:) userInfo:nil repeats:YES];
         
         [[NSRunLoop mainRunLoop] addTimer:task.taskTimer forMode:NSRunLoopCommonModes];
         
@@ -643,12 +687,15 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     //Change instance variable
     selectionChanged = true;
     
+    TDTodaysTask *task = lastSelectedCellView.objectValue;
+    
+    
     if (lastSelectedCellView)
     {
-        [lastSelectedCellView.taskName setBackgroundColor:TDTableRowBackgroundColor];
-        [lastSelectedCellView.taskTime setBackgroundColor:TDTableRowBackgroundColor];
+        [lastSelectedCellView.taskName setBackgroundColor:TDTableRowPriorityBackgroundColor[task.priority]];
+        [lastSelectedCellView.taskTime setBackgroundColor:TDTableRowPriorityBackgroundColor[task.priority]];
         
-        [lastSelectedCellView.progressView setBackgroundColor:TDTableRowBackgroundColor];
+        [lastSelectedCellView.progressView setBackgroundColor:TDTableRowPriorityBackgroundColor[task.priority]];
     }
     if (self.tableView.selectedRow>-1)
     {
@@ -674,14 +721,18 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
     NSLog (@"Selection is Changing");
     
     selectedRow = [self.tableView selectedRow];
+    
+    TDTodaysTask *task = lastSelectedCellView.objectValue;
+    
+    
     if (!selectionChanged)
     {
         if (lastSelectedCellView)
         {
-            [lastSelectedCellView.taskName setBackgroundColor:TDTableRowBackgroundColor];
-            [lastSelectedCellView.taskTime setBackgroundColor:TDTableRowBackgroundColor];
+            [lastSelectedCellView.taskName setBackgroundColor:TDTableRowPriorityBackgroundColor[task.priority]];
+            [lastSelectedCellView.taskTime setBackgroundColor:TDTableRowPriorityBackgroundColor[task.priority]];
             
-            [lastSelectedCellView.progressView setBackgroundColor:TDTableRowBackgroundColor];
+            [lastSelectedCellView.progressView setBackgroundColor:TDTableRowPriorityBackgroundColor[task.priority]];
             
         }
         if (self.tableView.selectedRow>-1)
@@ -702,7 +753,31 @@ static NSString *const TDColumnIdntifier = @"TDColumnIdentifier";
 -(void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
 {
     [self.todaysTasks sortUsingComparator:[self.tableView sortDescriptors][0]];
-    [self.tableView reloadData];
+    [self.tableView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.todaysTasks.count)] columnIndexes:[NSIndexSet indexSetWithIndex:0]];
+    
+    for (int i = 0; i < self.todaysTasks.count; i++)
+    {
+        TDTodaysTaskCellView *cellView = [self.tableView viewAtColumn:0 row:i makeIfNecessary:NO];
+        [cellView.taskName setBackgroundColor:TDTableRowPriorityBackgroundColor[[(TDTodaysTask *)self.todaysTasks[i] priority]]];
+    }
+    
+}
+
+#pragma mark NSUserNotificationDelegate
+
+-(void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification
+{
+    if (notification.activationType == NSUserNotificationActivationTypeActionButtonClicked)
+    {
+        NSLog (@"Activated");
+        currentWorkingTask.completed = YES;
+        currentWorkingView.completed.state = NSOnState;
+        
+        currentWorkingTask = nil;
+        currentWorkingView = nil;
+        
+        [self saveDataToDisk:self.todaysTasks];
+    }
 }
 
 #pragma mark Inherited Methods

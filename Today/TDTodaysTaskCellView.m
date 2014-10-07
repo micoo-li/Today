@@ -7,6 +7,8 @@
 //
 
 #import "TDTodaysTaskCellView.h"
+#import "TDTodaysTask.h"
+#import "TDConstants.h"
 
 @implementation TDTodaysTaskCellView
 
@@ -31,14 +33,21 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    [super drawRect:dirtyRect];
-    
     [[NSColor gridColor] set];
     
     NSBezierPath *path = [NSBezierPath bezierPath];
     [path moveToPoint:NSMakePoint(0, 0)];
     [path lineToPoint:NSMakePoint(dirtyRect.size.width, 0)];
     [path stroke];
+  /*
+    TDTodaysTask *task = self.objectValue;
+    
+    [TDTableRowPriorityBackgroundColor[task.priority] setFill];
+    NSBezierPath *rectPath = [NSBezierPath bezierPathWithRect:dirtyRect];
+    [rectPath fill];
+*/
+    
+    [super drawRect:dirtyRect];
     
 }
 
